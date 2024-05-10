@@ -264,31 +264,31 @@ void System::editeUser()
 }
 
 
-bool System::Register(string username,string password) {
-    
+bool System::Register(string username, string password) {
 
 
 
-   
-    
-     
-      
+
+
+
+
+
     //   password= SecureString();
-        
-        User user(username, sha256(password), 0);
-        allUsers[username] = user;
-        cout << "User '" << username << "' registered successfully." << endl;
-        System::loggedInUser = &System::allUsers[username];
-        return true;
-    
+
+    User user(username, sha256(password), 0);
+    allUsers[username] = user;
+    cout << "User '" << username << "' registered successfully." << endl;
+    System::loggedInUser = &System::allUsers[username];
+    return true;
+
 
 }
 
 
- 
 
 
-string System::sha256(string & input) {
+
+string System::sha256(string& input) {
     SHA256 hash;
     string output;
 
@@ -324,14 +324,7 @@ string System::SecureString() {
 }
 
 
-bool System::Login() {
-    string username;
-    string password;
-    cout << "please enter your name : ";
-    cin >> username;
-    cout << "please enter your password : ";
- //  password= SecureString();
-
+bool System::Login(string username, string password) {
 
     auto it = allUsers.find(username);
     string chooice;
@@ -342,14 +335,9 @@ bool System::Login() {
     }
     else {
         cout << "Invalid username or email. Login failed.\npress 0 to exit and others to retry" << endl;
-        cin >> chooice;
-        if (chooice == "0" && chooice.length() == 1)
-            return false;
-        else
-        {
-            if (!System::Login())
-                return false;
-        }
+
+        return false;
+
     }
 }
 void System::Logout() {

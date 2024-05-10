@@ -36,8 +36,8 @@ public:
 	static void addnewUser(string&);
 	static void removeUser(string&);
 	static User* getUser(string username);
-	static bool Login();
-	static bool Register(string,string);
+	static bool Login(string, string);
+	static bool Register(string, string);
 	static void Logout();
 	static void showAllUser();
 	static bool search_user(string);
@@ -47,7 +47,7 @@ public:
 	static void readPendingRequests();
 	static void readUsersFromFile();
 
-	static string sha256( string& input);
+	static string sha256(string& input);
 	static string SecureString();
 
 	static User* getUserForTrans(string username);
@@ -57,4 +57,3 @@ public:
 	//void deleteData();
 	~System();
 };
-

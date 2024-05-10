@@ -21,19 +21,19 @@ User omar("omar", "123123", 402.279);
 User amr("amr", "123123", 999999);
 User osama("osama", "123123", 999999);
 
-RenderWindow window(sf::VideoMode(1200, 800), "Digital Wallet System",Style::Default);
+RenderWindow window(sf::VideoMode(1200, 800), "Digital Wallet System", Style::Default);
 
-	Font rokebFint, britanicFont, berlinSansFont;
-	Texture headertexture, button_texture, background_texture, darkbackground_texture, text_field_texture
-		, background2_texture, home_icon_texture, add_user_texture, login_icon_texture, background_frame_texture, wallet_icon_texture, wallet_icon_2_texture, person_texture
-		, remove_user_texture, suspend_user_texture, reactivate_user_texture, edit_user_texture, transiction_history_texture, user_history_texture, request_texture,
-		logout_texture,setting_texture, profile_edit_texture, messages_texture, admin_icon_texture,
-		yes_texture,no_texture,back_texture,user_icon_texture, send_texture, balance_texture;
+Font rokebFint, britanicFont, berlinSansFont;
+Texture headertexture, button_texture, background_texture, darkbackground_texture, text_field_texture
+, background2_texture, home_icon_texture, add_user_texture, login_icon_texture, background_frame_texture, wallet_icon_texture, wallet_icon_2_texture, person_texture
+, remove_user_texture, suspend_user_texture, reactivate_user_texture, edit_user_texture, transiction_history_texture, user_history_texture, request_texture,
+logout_texture, setting_texture, profile_edit_texture, messages_texture, admin_icon_texture,
+yes_texture, no_texture, back_texture, user_icon_texture, send_texture, balance_texture;
 
 
-	Sprite background,background2,wallet_icon, wallet_icon_2,login_icon,add_user,remove_user,suspend_user,reactivate_user, edit_user,
-		logout,transiction_history,user_history,request,send,message,home_icon,person, admin_icon, user_icon,
-		yes,no,back,balance,setting,profile_edit;
+Sprite background, background2, wallet_icon, wallet_icon_2, login_icon, add_user, remove_user, suspend_user, reactivate_user, edit_user,
+logout, transiction_history, user_history, request, send, message, home_icon, person, admin_icon, user_icon,
+yes, no, back, balance, setting, profile_edit;
 
 
 struct half
@@ -50,23 +50,23 @@ struct half
 	Text text1, text2, text3, text4, text5, text6, text7, text8, text9, text10, text11;
 	bool isTextField1Active, isTextField2Active;
 
-	
+
 	//int size_of_arr = 100;
-	Sprite *textfiled_arr_1;
-	Sprite *textfiled_arr_2;
-	Sprite *textfiled_arr_3;
+	Sprite* textfiled_arr_1;
+	Sprite* textfiled_arr_2;
+	Sprite* textfiled_arr_3;
 	Sprite* textfiled_arr_4;
 
 	Sprite* frame_background_arr;
-	 Sprite *button_1_arr ;
-	 Sprite *button_2_arr ;
+	Sprite* button_1_arr;
+	Sprite* button_2_arr;
 
-	Text *text_arr_1;
-	Text *text_arr_2;
-	Text *text_arr_3;
-	Text *text_arr_4;
-	Text *text_arr_5;
-	Text *text_arr_6;
+	Text* text_arr_1;
+	Text* text_arr_2;
+	Text* text_arr_3;
+	Text* text_arr_4;
+	Text* text_arr_5;
+	Text* text_arr_6;
 	Text* text_arr_7;
 	Text* text_arr_8;
 
@@ -126,11 +126,11 @@ void user_set(half& h1, User& ali);
 void user_draw(half& h1);
 ////////////////////////////////////////////////////////////
 void User_login();
-void user_login_draw(half &h1);
+void user_login_draw(half& h1);
 void user_login_set(half& h1);
 ////////////////////////////////////////////////////////////
 void user_send(User& ali);
-void user_send_set(half& h1,User& ali);
+void user_send_set(half& h1, User& ali);
 void user_send_draw(half& h1);
 ////////////////////////////////////////////////////////////
 void user_request(User& ali);
@@ -170,7 +170,7 @@ void admin_add_user(Admin& ali);
 void admin_add_user_set(half& h1);
 void admin_add_user_draw(half& h1);
 ////////////////////////////////////////////////////////////
-void admin_edit_user(Admin &ali);
+void admin_edit_user(Admin& ali);
 void admin_edit_user_set(half& h1);
 void admin_edit_user_draw(half& h1);
 ////////////////////////////////////////////////////////////
@@ -199,16 +199,16 @@ void admin_remove_user_set(half& h1);
 void admin_remove_user_draw(half& h1);
 ////////////////////////////////////////////////////////////
 void admin_all_transactions(Admin& ali);
-void admin_all_transactions_set(half& h1,Admin&ali);
+void admin_all_transactions_set(half& h1, Admin& ali);
 void admin_all_transactions_draw(half& h1);
 ////////////////////////////////////////////////////////////
 void admin_all_users(Admin& ali);
 void admin_all_users_set(half& h1);
 void admin_all_users_draw(half& h1);
 ////////////////////////////////////////////////////////////
-void admin_User_transactions(Admin& ali,User &omar);
-void admin_User_transactions_set(half& h1, Admin& ali,User &omar);
-void admin_User_transactions_draw(half& h1,User &omar);
+void admin_User_transactions(Admin& ali, User& omar);
+void admin_User_transactions_set(half& h1, Admin& ali, User& omar);
+void admin_User_transactions_draw(half& h1, User& omar);
 ///////////////////////////////////////////////////////////
 //******************Home & signup************************//
 void Signup();
@@ -225,112 +225,112 @@ void home_draw(half& h1);
 //******************Main*********************************//
 void main() {
 	{
-	texturesandfonts();
-	Transaction t1("amr", "1st recive", 20000);
-	Transaction t2("send2", "amr", 4231.25);
-	Transaction t3("amr", "3rd recive", 31564);
-	Transaction t4("amr", "4th message", 8976);
-	Transaction t5("send5", "amr", 2525);
+		texturesandfonts();
+		Transaction t1("amr", "1st recive", 20000);
+		Transaction t2("send2", "amr", 4231.25);
+		Transaction t3("amr", "3rd recive", 31564);
+		Transaction t4("amr", "4th message", 8976);
+		Transaction t5("send5", "amr", 2525);
 
-	Transaction t6("omar", "1st recive", 20000);
-	Transaction t7("send2", "omar", 4231.25);
-	Transaction t8("omar", "3rd recive", 31564);
-	Transaction t9("omar", "4th message", 8976);
-	Transaction t10("send5", "omar", 2525);
+		Transaction t6("omar", "1st recive", 20000);
+		Transaction t7("send2", "omar", 4231.25);
+		Transaction t8("omar", "3rd recive", 31564);
+		Transaction t9("omar", "4th message", 8976);
+		Transaction t10("send5", "omar", 2525);
 
-	Transaction t11("osama", "1st recive", 20000);
-	Transaction t12("send2", "osama", 4231.25);
-	Transaction t13("osama", "3rd recive", 31564);
-	Transaction t14("osama", "4th message", 8976);
-	Transaction t15("send5", "osama", 2525);
+		Transaction t11("osama", "1st recive", 20000);
+		Transaction t12("send2", "osama", 4231.25);
+		Transaction t13("osama", "3rd recive", 31564);
+		Transaction t14("osama", "4th message", 8976);
+		Transaction t15("send5", "osama", 2525);
 
-	DATE d1, d2;
-	d1.day = 28; d1.month = 4; d1.year = 2003;
-	d1.hour = 9; d1.min = 30;
+		DATE d1, d2;
+		d1.day = 28; d1.month = 4; d1.year = 2003;
+		d1.hour = 9; d1.min = 30;
 
-	d2.day = 4; d2.month = 9; d2.year = 2003;
-	d2.hour = 6; d2.min = 45;
+		d2.day = 4; d2.month = 9; d2.year = 2003;
+		d2.hour = 6; d2.min = 45;
 
-	t1.Date = d1;
-	t2.Date = d2;
-	t3.Date = d1;
-	t4.Date = d2;
-	t5.Date = d1;
+		t1.Date = d1;
+		t2.Date = d2;
+		t3.Date = d1;
+		t4.Date = d2;
+		t5.Date = d1;
 
-	t6.Date = d1;
-	t7.Date = d2;
-	t8.Date = d1;
-	t9.Date = d2;
-	t10.Date = d1;
+		t6.Date = d1;
+		t7.Date = d2;
+		t8.Date = d1;
+		t9.Date = d2;
+		t10.Date = d1;
 
-	t11.Date = d1;
-	t12.Date = d2;
-	t13.Date = d1;
-	t14.Date = d2;
-	t15.Date = d1;
+		t11.Date = d1;
+		t12.Date = d2;
+		t13.Date = d1;
+		t14.Date = d2;
+		t15.Date = d1;
 
 
-	omar.pendingRequests.push_back(t5);
-	omar.pendingRequests.push_back(t1);
-	omar.pendingRequests.push_back(t2);
-	omar.pendingRequests.push_back(t3);
-	omar.pendingRequests.push_back(t4);
+		omar.pendingRequests.push_back(t5);
+		omar.pendingRequests.push_back(t1);
+		omar.pendingRequests.push_back(t2);
+		omar.pendingRequests.push_back(t3);
+		omar.pendingRequests.push_back(t4);
 
-	/*omar.pendingRequests.push_back(t5);
-	omar.pendingRequests.push_back(t4);
-	omar.pendingRequests.push_back(t3);
-	omar.pendingRequests.push_back(t2);
-	omar.pendingRequests.push_back(t1);*/
+		/*omar.pendingRequests.push_back(t5);
+		omar.pendingRequests.push_back(t4);
+		omar.pendingRequests.push_back(t3);
+		omar.pendingRequests.push_back(t2);
+		omar.pendingRequests.push_back(t1);*/
 
-	omar.History.push_back(t6);
-	omar.History.push_back(t7);
-	omar.History.push_back(t8);
-	omar.History.push_back(t9);
-	omar.History.push_back(t10);
+		omar.History.push_back(t6);
+		omar.History.push_back(t7);
+		omar.History.push_back(t8);
+		omar.History.push_back(t9);
+		omar.History.push_back(t10);
 
-	amr.History.push_back(t1);
-	amr.History.push_back(t2);
-	amr.History.push_back(t3);
-	amr.History.push_back(t4);
-	amr.History.push_back(t5);
+		amr.History.push_back(t1);
+		amr.History.push_back(t2);
+		amr.History.push_back(t3);
+		amr.History.push_back(t4);
+		amr.History.push_back(t5);
 
-	osama.History.push_back(t11);
-	osama.History.push_back(t12);
-	osama.History.push_back(t13);
-	osama.History.push_back(t14);
-	osama.History.push_back(t15);
+		osama.History.push_back(t11);
+		osama.History.push_back(t12);
+		osama.History.push_back(t13);
+		osama.History.push_back(t14);
+		osama.History.push_back(t15);
 
-	System::allTransactions.push_back(t5);
-	System::allTransactions.push_back(t4);
-	System::allTransactions.push_back(t3);
-	System::allTransactions.push_back(t2);
-	System::allTransactions.push_back(t1);
+		System::allTransactions.push_back(t5);
+		System::allTransactions.push_back(t4);
+		System::allTransactions.push_back(t3);
+		System::allTransactions.push_back(t2);
+		System::allTransactions.push_back(t1);
 
-	System::allUsers[omar.UserName] = omar;
-	System::allUsers[amr.UserName] = amr;
-	System::allUsers[osama.UserName] = osama;
-	System::allUsers[omar.UserName] = omar;
-	System::allUsers[amr.UserName] = amr;
-	System::allUsers[osama.UserName] = osama;
-}
+		System::allUsers[omar.UserName] = omar;
+		System::allUsers[amr.UserName] = amr;
+		System::allUsers[osama.UserName] = osama;
+		System::allUsers[omar.UserName] = omar;
+		System::allUsers[amr.UserName] = amr;
+		System::allUsers[osama.UserName] = osama;
+	}
 	System::readUsersFromFile();
 	System::readAllTransactions();
 	System::readPendingRequests();
 	for (Transaction& t : System::allTransactions)
 	{
-		 //Get sender and receiver from the transaction
+		//Get sender and receiver from the transaction
 		string senderName = t.getSender();
 		string receiverName = t.getReciever();
 
 		//Get sender user from the system
-		User* sender = System::getUser(senderName);
+		User* sender = System::getUserForTrans(senderName);
 		if (sender == nullptr) {
 
 			continue; // Skip to the next transaction
 		}
 
 		// Get receiver user from the system
-		User* receiver = System::getUser(receiverName);
+		User* receiver = System::getUserForTrans(receiverName);
 		if (receiver == nullptr) {
 
 			continue; // Skip to the next transaction
@@ -339,7 +339,7 @@ void main() {
 		// Add transaction to sender's and receiver's history
 		sender->addTransactionToHistory(t);
 		receiver->addTransactionToHistory(t);
-		
+
 	}
 	for (Transaction& t : System::allPendingRequests)
 	{
@@ -367,15 +367,15 @@ void main() {
 
 	}
 
-	
-	admin(ali);
-
-
+	//Signup();
+	//admin(ali);
+	//User_login();
+	admin_all_users(ali);
 	System::writePendingRequests();
 	System::writeAllTransactions();
 	System::writeUsersToFile();
-	
-	//Signup();
+
+
 	//Home();
 	//user(omar);
 }
@@ -383,7 +383,7 @@ void main() {
 
 
 
-void texturesandfonts() 
+void texturesandfonts()
 {
 	background_texture.loadFromFile("assets/background.jpg");
 
@@ -396,7 +396,7 @@ void texturesandfonts()
 
 	background_frame_texture.loadFromFile("assets/header 2.png");
 	login_icon_texture.loadFromFile("assets/login icon.png");
-	
+
 	add_user_texture.loadFromFile("assets/add.png");
 	remove_user_texture.loadFromFile("assets/remove user.png");
 	suspend_user_texture.loadFromFile("assets/suspend.png");
@@ -436,6 +436,18 @@ void User_login()
 	half h1;
 	user_login_set(h1);
 
+	std::string username, password; // Variables to store entered username and password
+
+	sf::Text enteredUsername, enteredPassword;
+	enteredUsername.setFont(rokebFint);
+	enteredPassword.setFont(rokebFint);
+	enteredUsername.setFillColor(Color::Black);
+	enteredPassword.setFillColor(Color::Black);
+	enteredUsername.setCharacterSize(21);
+	enteredPassword.setCharacterSize(25);
+	enteredUsername.setPosition(690, 255);
+	enteredPassword.setPosition(690, 335);
+
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = h1.half_background.getPosition();
 	float initialYPosition = 800; // Initial position below the window
@@ -474,6 +486,9 @@ void User_login()
 
 	// Create a clock to measure time
 	sf::Clock clock;
+	sf::String enteredText; // Stores the text entered by the user
+	bool isUsernameInputActive = false;
+	bool isPasswordInputActive = false;
 
 	// Event loop
 	while (window.isOpen())
@@ -486,6 +501,43 @@ void User_login()
 			sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
 			// Check if mouse is over specific sprites and adjust scale accordingly
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+				sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+				// Check if mouse clicked on username input field
+				if (h1.textfiled_1.getGlobalBounds().contains(Vector2f(mousePosition))) {
+					isUsernameInputActive = true;
+					isPasswordInputActive = false;
+				}
+
+				// Check if mouse clicked on password input field
+				if (h1.textfiled_2.getGlobalBounds().contains(sf::Vector2f(mousePosition))) {
+					isUsernameInputActive = false;
+					isPasswordInputActive = true;
+				}
+
+			}
+			if (event.type == sf::Event::TextEntered) {
+				if (isUsernameInputActive) {
+					if (event.text.unicode == '\b' && !username.empty()) { // Backspacek
+						username.pop_back();
+					}
+					else if (event.text.unicode < 128) {
+						username += static_cast<char>(event.text.unicode);
+					}
+					enteredUsername.setString(username);
+				}
+
+				if (isPasswordInputActive) {
+					if (event.text.unicode == '\b' && !password.empty()) { // Backspace
+						password.pop_back();
+					}
+					else if (event.text.unicode < 128) {
+						password += static_cast<char>(event.text.unicode);
+					}
+					enteredPassword.setString(std::string(password.size(), '*'));
+				}
+			}
 			if (true) {
 				if (wallet_icon.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					wallet_icon.setScale(0.22, 0.22); // Scale up
@@ -580,11 +632,26 @@ void User_login()
 				return Admin_login();
 			}
 
+
 			if (h1.button_3.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
 				//cout << "aiaoiosa\n";
 				window.clear();
 				return Signup();
+			}
+			if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+			{
+				if (System::Login(username, password)) {
+
+
+					window.clear();
+					window.clear();
+
+					return user(System::allUsers[username]);
+				}
+				else {
+					cout << "ayhaga";//HANDLE DEH ENNNO YEMSAH EL TEXT LMA Y3ML LOGIN GHALAT 
+				}
 			}
 		}
 
@@ -661,7 +728,8 @@ void User_login()
 		window.draw(h1.text7);
 		window.draw(h1.text8);
 		window.draw(h1.text9);
-
+		window.draw(enteredUsername);
+		window.draw(enteredPassword);
 		// Display the window
 		window.display();
 
@@ -792,6 +860,17 @@ void Admin_login()
 	//texturesandfonts();
 	half h1;
 	admin_login_set(h1);
+	std::string username, password; // Variables to store entered username and password
+
+	sf::Text enteredUsername, enteredPassword;
+	enteredUsername.setFont(rokebFint);
+	enteredPassword.setFont(rokebFint);
+	enteredUsername.setFillColor(Color::Black);
+	enteredPassword.setFillColor(Color::Black);
+	enteredUsername.setCharacterSize(21);
+	enteredPassword.setCharacterSize(25);
+	enteredUsername.setPosition(690, 255);
+	enteredPassword.setPosition(690, 335);
 
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = h1.half_background.getPosition();
@@ -826,6 +905,9 @@ void Admin_login()
 
 	// Create a clock to measure time
 	sf::Clock clock;
+	sf::String enteredText; // Stores the text entered by the user
+	bool isUsernameInputActive = false;
+	bool isPasswordInputActive = false;
 
 	// Event loop
 	while (window.isOpen())
@@ -838,6 +920,43 @@ void Admin_login()
 
 			sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+				sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+				// Check if mouse clicked on username input field
+				if (h1.textfiled_1.getGlobalBounds().contains(Vector2f(mousePosition))) {
+					isUsernameInputActive = true;
+					isPasswordInputActive = false;
+				}
+
+				// Check if mouse clicked on password input field
+				if (h1.textfiled_2.getGlobalBounds().contains(sf::Vector2f(mousePosition))) {
+					isUsernameInputActive = false;
+					isPasswordInputActive = true;
+				}
+
+			}
+			if (event.type == sf::Event::TextEntered) {
+				if (isUsernameInputActive) {
+					if (event.text.unicode == '\b' && !username.empty()) { // Backspacek
+						username.pop_back();
+					}
+					else if (event.text.unicode < 128) {
+						username += static_cast<char>(event.text.unicode);
+					}
+					enteredUsername.setString(username);
+				}
+
+				if (isPasswordInputActive) {
+					if (event.text.unicode == '\b' && !password.empty()) { // Backspace
+						password.pop_back();
+					}
+					else if (event.text.unicode < 128) {
+						password += static_cast<char>(event.text.unicode);
+					}
+					enteredPassword.setString(std::string(password.size(), '*'));
+				}
+			}
 			if (true) {
 				if (wallet_icon.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					wallet_icon.setScale(0.22, 0.22);
@@ -913,6 +1032,17 @@ void Admin_login()
 				window.clear();
 				return User_login();
 			}
+			if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+			{
+				if (username == "admin" && password == "admin") {
+
+
+					window.clear();
+
+					return admin(ali);
+				}
+				else cout << "ayhaga";//nafs elklam elly feluser login
+			}
 		}
 
 		// Handle mouse interaction with buttons
@@ -977,6 +1107,8 @@ void Admin_login()
 		window.draw(h1.button_3);
 		window.draw(h1.text3);
 		window.draw(h1.text7);
+		window.draw(enteredUsername);
+		window.draw(enteredPassword);
 
 
 		// Display the window
@@ -1011,9 +1143,9 @@ void admin_login_set(half& h1)
 	h1.button_2.setTexture(button_texture);
 	h1.button_2.setScale(0.1, 0.1);
 	h1.button_2.setPosition(820, 620);
-	 
-	
-	
+
+
+
 	h1.text1.setString("Welcome,to");
 	h1.text1.setCharacterSize(40);
 	h1.text1.setPosition(100, 280);
@@ -1056,7 +1188,7 @@ void admin_login_set(half& h1)
 	h1.frame_background.setTexture(background_frame_texture);
 	h1.frame_background.setScale(0.25, 1.2);
 	h1.frame_background.setPosition(520, 60);
-	
+
 	h1.textfiled_1.setTexture(text_field_texture);
 	h1.textfiled_1.setScale(0.15, 0.1);
 	h1.textfiled_1.setPosition(680, 250);
@@ -1306,14 +1438,14 @@ void Signup()
 			}
 			if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
-				if (System::allUsers.find(username) != System::allUsers.end()&& password.empty() ) {
+				if (System::allUsers.find(username) != System::allUsers.end() && password.empty()) {
 					cout << "Username already exist \n";
 
 
 				}
 				else
 				{
-					
+
 					window.clear();
 					window.clear();
 					System::Register(username, password);
@@ -1321,8 +1453,8 @@ void Signup()
 				}
 			}
 
-		
-		
+
+
 		}
 
 		// Handle mouse interaction with buttons
@@ -1331,9 +1463,9 @@ void Signup()
 		window.clear();
 
 		// Draw other sprites
-		
+
 		signup_draw(h1);
-	
+
 
 		// Calculate the new position of the sprites based on elapsed time for x-axis transition
 		if (clock.getElapsedTime().asSeconds() < animationTimeX)
@@ -1386,7 +1518,7 @@ void Signup()
 			h1.text8.setPosition(630, finalText8YPosition);
 			h1.text9.setPosition(590, finalText9YPosition);
 		}
-		
+
 		// Draw the half_background sprite
 		window.draw(h1.half_background);
 
@@ -1402,7 +1534,7 @@ void Signup()
 		window.draw(h1.text9);
 		window.draw(enteredUsername);
 		window.draw(enteredPassword);
-		
+
 		// Display the window
 		window.display();
 
@@ -1807,17 +1939,17 @@ void home_draw(half& h1)
 	window.draw(h1.button_3);
 
 	window.draw(h1.text1);
-	window.draw(h1.text2);	
+	window.draw(h1.text2);
 	window.draw(h1.text3);
 	window.draw(h1.text4);
 	window.draw(h1.text5);
 	window.draw(h1.text6);
 	window.draw(h1.text7);
-	
+
 
 }
 
-void user(User &ali)
+void user(User& ali)
 
 {
 	//texturesandfonts();
@@ -1866,12 +1998,12 @@ void user(User &ali)
 				else
 					send.setScale(0.2f, 0.2f); // Return to original scale
 
-				if (request.getGlobalBounds().contains(sf::Vector2f(mousePosition)) )
+				if (request.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					request.setScale(0.22f, 0.22f); // Scale up
 				else
 					request.setScale(0.2f, 0.2f);
 
-				if (message.getGlobalBounds().contains(sf::Vector2f(mousePosition)) )
+				if (message.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					message.setScale(0.11f, 0.11f); // Scale up
 				else
 					message.setScale(0.1f, 0.1f);
@@ -1960,14 +2092,14 @@ void user(User &ali)
 				window.clear();
 				return Home();
 			}
-			
+
 			if (send.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
 				//cout << "aiaoiosa\n";
 				//window.clear();
 				return user_send(ali);
 			}
-			
+
 			if (request.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
 				//cout << "aiaoiosa\n";
@@ -2144,7 +2276,7 @@ void user_set(half& h1, User& ali)
 	stringstream stream;
 	stream << fixed << setprecision(2) << ali.balance;
 	//stream.str() += '$';
-	h1.text10.setString(stream.str()+" $");
+	h1.text10.setString(stream.str() + " $");
 	h1.text10.setFont(britanicFont);
 	h1.text10.setPosition(588, 80);
 	h1.text10.setFillColor(sf::Color::Black);
@@ -2157,10 +2289,10 @@ void user_set(half& h1, User& ali)
 	else if (ali.balance > 1000000)
 		h1.textfiled_1.setScale(0.1, 0.1);
 	else
-		h1.textfiled_1.setScale(0.072,0.1);
-	h1.textfiled_1.setPosition(580,75);
+		h1.textfiled_1.setScale(0.072, 0.1);
+	h1.textfiled_1.setPosition(580, 75);
 
-	
+
 
 	h1.frame_background.setTexture(background_frame_texture);
 	h1.frame_background.setScale(0.25, 1.2);
@@ -2174,15 +2306,15 @@ void user_set(half& h1, User& ali)
 	h1.textfiled_2.setScale(0.15, 0.1);
 	h1.textfiled_2.setPosition(680, 330);*/
 }
-void user_draw(half &h1)
+void user_draw(half& h1)
 {
 	window.draw(background);
 	window.draw(h1.half_background);
 	//window.draw(user_icon);
 
-	
+
 	//window.draw(profile_edit);
-	
+
 	window.draw(h1.textfiled_1);
 
 
@@ -2265,7 +2397,7 @@ void user_send(User& ali)
 					send.setScale(0.22, 0.22); // Scale up
 				else
 					send.setScale(0.2, 0.2);
-				
+
 				if (transiction_history.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					transiction_history.setScale(0.22f, 0.22f); // Scale up
 				else
@@ -2338,7 +2470,7 @@ void user_send(User& ali)
 				window.clear();
 				return Home();
 			}
-			if(back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+			if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
 				//cout << "aiaoiosa\n";
 				window.clear();
@@ -2382,7 +2514,7 @@ void user_send(User& ali)
 		window.draw(h1.text1);
 		window.draw(h1.text2);
 		window.draw(user_icon);
-		
+
 
 		// Display the window
 		window.display();
@@ -2392,7 +2524,7 @@ void user_send(User& ali)
 			break;*/
 	}
 }
-void user_send_set(half &h1,User& ali)
+void user_send_set(half& h1, User& ali)
 {
 	background.setTexture(background_texture);
 	background.setScale(1.5, 1.5);
@@ -2400,11 +2532,11 @@ void user_send_set(half &h1,User& ali)
 	h1.frame_background.setTexture(background_frame_texture);
 	h1.frame_background.setScale(0.47, 0.47);
 	h1.frame_background.setPosition(30, 320);
-	
+
 	user_icon.setTexture(user_icon_texture);
 	user_icon.setScale(0.2, 0.2);
 	user_icon.setPosition(-500, 80);
-	
+
 	send.setTexture(send_texture);
 	send.setScale(0.2, 0.2);
 	send.setPosition(550, 230);
@@ -2492,12 +2624,12 @@ void user_send_draw(half& h1)
 	window.draw(background);
 	window.draw(h1.half_background);
 	window.draw(user_icon);
-	
+
 	window.draw(h1.frame_background);
 	window.draw(h1.button_1);
 
 	window.draw(back);
-	
+
 
 
 	window.draw(h1.textfiled_1);
@@ -2591,12 +2723,12 @@ void user_request(User& ali)
 					request.setScale(0.22f, 0.22f); // Scale up
 				else
 					request.setScale(0.2, 0.2);
-				
+
 				if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					back.setScale(0.165, 0.165); // Scale up
 				else
 					back.setScale(0.15, 0.15);
-				
+
 
 
 				if (h1.text1.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
@@ -2646,13 +2778,13 @@ void user_request(User& ali)
 
 				if (h1.text11.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					h1.text11.setCharacterSize(25); // Scale up
-				else		
+				else
 					h1.text11.setCharacterSize(24);
 
 				if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-					h1.button_1.setScale(0.111,0.11); // Scale up
+					h1.button_1.setScale(0.111, 0.11); // Scale up
 				else
-					h1.button_1.setScale(0.11, 0.1); 
+					h1.button_1.setScale(0.11, 0.1);
 
 			}
 			if (logout.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
@@ -2703,7 +2835,7 @@ void user_request(User& ali)
 		window.draw(h1.text1);
 		window.draw(h1.text2);
 		window.draw(user_icon);
-		
+
 		// Display the window
 		window.display();
 
@@ -2728,7 +2860,7 @@ void user_request_set(half& h1, User& ali)
 	balance.setTexture(balance_texture);
 	balance.setScale(0.15, 0.15);
 	balance.setPosition(500, 60);
-	
+
 	request.setTexture(request_texture);
 	request.setScale(0.2, 0.2);
 	request.setPosition(550, 230);
@@ -2806,7 +2938,7 @@ void user_request_set(half& h1, User& ali)
 	h1.button_1.setTexture(button_texture);
 	h1.button_1.setScale(0.11, 0.1);
 	h1.button_1.setPosition(480, 600);
-	
+
 }
 void user_request_draw(half& h1)
 {
@@ -2815,7 +2947,7 @@ void user_request_draw(half& h1)
 	window.draw(h1.frame_background);
 	window.draw(user_icon);
 	window.draw(request);
-	
+
 	window.draw(back);
 
 	window.draw(h1.textfiled_1);
@@ -2860,8 +2992,8 @@ void user_messeges(User& ali)
 	h1.text_arr_4 = new Text[ali.pendingRequests.size()];
 	h1.text_arr_5 = new Text[ali.pendingRequests.size()];
 	h1.text_arr_6 = new Text[ali.pendingRequests.size()];
-		//texturesandfonts();
-	//size_of_arr = ali.pendingRequests.size();
+	//texturesandfonts();
+//size_of_arr = ali.pendingRequests.size();
 	user_messeges_set(h1, ali);
 
 	// Get the initial position of the wallet_icon, half_background, and other elements
@@ -2887,7 +3019,7 @@ void user_messeges(User& ali)
 	// Define the speed of the animation for x-axis transition
 	float animationSpeedX2 = 1500; // pixels per second
 
-	
+
 	// Calculate the distance to move for the x-axis transition
 	float distanceToMoveX2 = finalXPosition - initialPosition2;
 
@@ -3048,8 +3180,8 @@ void user_messeges(User& ali)
 			user_icon.setPosition(newXPosition + 50, 80); // Adjust position of wallet_icon
 			//profile_edit.setPosition(950 - newXPosition, 80);
 			//h1.text3.setPosition(950 - newXPosition, 180);
-			back.setPosition(1050- newXPosition, 240);
-			message.setPosition(550- newXPosition, 230);
+			back.setPosition(1050 - newXPosition, 240);
+			message.setPosition(550 - newXPosition, 230);
 
 		}
 		else
@@ -3057,7 +3189,7 @@ void user_messeges(User& ali)
 			// Animation for x-axis transition is complete, set the final position of the sprites
 			h1.text1.setPosition(finalXPosition + 165, 80); // Adjust position of text1
 			h1.text2.setPosition(finalXPosition + 190, 130); // Adjust position of text2
-			user_icon.setPosition(finalXPosition + 50, 80); 
+			user_icon.setPosition(finalXPosition + 50, 80);
 			back.setPosition(1050, 240);
 			message.setPosition(550, 230);
 
@@ -3066,14 +3198,14 @@ void user_messeges(User& ali)
 		{
 			float elapsedTimeX2 = clock.getElapsedTime().asSeconds();
 			float newXPosition2 = initialPosition2 + (distanceToMoveX2 * (elapsedTimeX2 / animationTimeX2));
-			
+
 			back.setPosition(1050 - newXPosition2, 240);
 			message.setPosition(550 - newXPosition2, 230);
 
 		}
 		else
 		{
-			
+
 			back.setPosition(1050, 240);
 			message.setPosition(550, 230);
 
@@ -3142,38 +3274,38 @@ void user_messeges(User& ali)
 		}
 
 
-		
 
-			// Draw the texts, wallet_icon, buttons
-			window.draw(h1.text1);
-			window.draw(h1.text2);
-			window.draw(user_icon);
-			window.draw(message);
-			window.draw(back);
-			if (ali.pendingRequests.empty()) 
-			{
-				window.draw(h1.text8);
-			}
-			for (int i = 0; i < ali.pendingRequests.size(); i++)
-			{
-				window.draw(h1.frame_background_arr[i]);
-				window.draw(h1.textfiled_arr_1[i]);
-				window.draw(h1.textfiled_arr_2[i]);
-				window.draw(h1.text_arr_1[i]);
-				window.draw(h1.text_arr_2[i]);
-				window.draw(h1.button_1_arr[i]);
-				window.draw(h1.button_2_arr[i]);
-				window.draw(h1.text_arr_3[i]);
-				window.draw(h1.text_arr_4[i]);
-			}
-			// Display the window
-			window.display();
 
-			// Check if both animations are complete
-			/*if (clock.getElapsedTime().asSeconds() >= animationTimeX && clock.getElapsedTime().asSeconds() >= animationTimeY)
-				break;*/
+		// Draw the texts, wallet_icon, buttons
+		window.draw(h1.text1);
+		window.draw(h1.text2);
+		window.draw(user_icon);
+		window.draw(message);
+		window.draw(back);
+		if (ali.pendingRequests.empty())
+		{
+			window.draw(h1.text8);
+		}
+		for (int i = 0; i < ali.pendingRequests.size(); i++)
+		{
+			window.draw(h1.frame_background_arr[i]);
+			window.draw(h1.textfiled_arr_1[i]);
+			window.draw(h1.textfiled_arr_2[i]);
+			window.draw(h1.text_arr_1[i]);
+			window.draw(h1.text_arr_2[i]);
+			window.draw(h1.button_1_arr[i]);
+			window.draw(h1.button_2_arr[i]);
+			window.draw(h1.text_arr_3[i]);
+			window.draw(h1.text_arr_4[i]);
+		}
+		// Display the window
+		window.display();
 
-		
+		// Check if both animations are complete
+		/*if (clock.getElapsedTime().asSeconds() >= animationTimeX && clock.getElapsedTime().asSeconds() >= animationTimeY)
+			break;*/
+
+
 	}
 }
 void user_messeges_set(half& h1, User& ali)
@@ -3182,7 +3314,7 @@ void user_messeges_set(half& h1, User& ali)
 	background.setTexture(background_texture);
 	background.setScale(1.5, 3);
 	background.setPosition(0, -500);
-	
+
 	deque<Transaction> temp;
 	int originalSize = ali.pendingRequests.size();
 	for (int i = 0; i < originalSize; ++i)
@@ -3219,7 +3351,7 @@ void user_messeges_set(half& h1, User& ali)
 		h1.text_arr_2[i].setCharacterSize(20);
 		h1.text_arr_2[i].setPosition(750, 392 + i * 160);
 		h1.text_arr_2[i].setFillColor(sf::Color::White);
-		
+
 		h1.button_1_arr[i].setTexture(yes_texture);
 		h1.button_1_arr[i].setScale(0.105, 0.105);
 		h1.button_1_arr[i].setPosition(670, 439 + i * 160);
@@ -3231,11 +3363,11 @@ void user_messeges_set(half& h1, User& ali)
 		h1.text_arr_3[i].setString(temp.back().reciever);
 		h1.text_arr_3[i].setFont(berlinSansFont);
 		h1.text_arr_3[i].setCharacterSize(24);
-		h1.text_arr_3[i].setPosition(315,385 + i * 160);
+		h1.text_arr_3[i].setPosition(315, 385 + i * 160);
 		h1.text_arr_3[i].setFillColor(sf::Color::Black);
 
 		stringstream stream2;
-		stream2 << fixed << setprecision(2) <<temp.back().amount;
+		stream2 << fixed << setprecision(2) << temp.back().amount;
 		h1.text_arr_4[i].setString(stream2.str() + " $");
 		h1.text_arr_4[i].setFont(berlinSansFont);
 		h1.text_arr_4[i].setCharacterSize(22);
@@ -3307,7 +3439,7 @@ void user_messeges_set(half& h1, User& ali)
 		h1.text8.setPosition(400, 450);
 		h1.text8.setFillColor(Color::Blue);
 	}
-	
+
 
 
 }
@@ -3317,7 +3449,7 @@ void user_messeges_draw(half& h1)
 	window.draw(h1.half_background);
 	window.draw(h1.frame_background);
 	window.draw(user_icon);
-	
+
 
 	window.draw(h1.textfiled_1);
 	//window.draw(h1.textfiled_2);
@@ -3334,10 +3466,10 @@ void user_messeges_draw(half& h1)
 	window.draw(h1.text9);
 	window.draw(h1.text10);
 
-	
+
 	window.draw(balance);
 
-	
+
 }
 
 void user_transactions(User& ali)
@@ -3432,7 +3564,7 @@ void user_transactions(User& ali)
 				else
 					back.setScale(0.15, 0.15);
 
-				
+
 
 				if (h1.text1.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					h1.text1.setCharacterSize(43); // Scale up
@@ -3639,9 +3771,9 @@ void user_transactions(User& ali)
 				h1.textfiled_arr_3[i].setPosition(initialPosition2 + 300, 443 + i * 160);
 				h1.textfiled_arr_4[i].setPosition(initialPosition2 + 850, 443 + i * 160);
 
-				
-				
-				
+
+
+
 				h1.text_arr_1[i].setPosition(initialPosition2 + 87, 392 + i * 160);
 				h1.text_arr_2[i].setPosition(initialPosition2 + 750, 392 + i * 160);
 				h1.text_arr_3[i].setPosition(initialPosition2 + 315, 385 + i * 160);
@@ -3700,11 +3832,11 @@ void user_transactions(User& ali)
 }
 void user_transactions_set(half& h1, User& ali)
 {
-	
+
 	background.setTexture(background_texture);
 	background.setScale(1.5, 3);
 	background.setPosition(0, -500);
-	
+
 	auto it = ali.History.rbegin();
 	for (int i = 0; i < ali.History.size(); i++)
 	{
@@ -3729,7 +3861,7 @@ void user_transactions_set(half& h1, User& ali)
 		h1.textfiled_arr_4[i].setScale(0.08, 0.08);
 		h1.textfiled_arr_4[i].setPosition(850, 443 + i * 160);
 
-		
+
 
 		h1.text_arr_1[i].setString("Sender Username");
 		h1.text_arr_1[i].setFont(berlinSansFont);
@@ -3774,8 +3906,8 @@ void user_transactions_set(half& h1, User& ali)
 		h1.text_arr_4[i].setCharacterSize(22);
 		h1.text_arr_4[i].setPosition(865, 388 + i * 160);
 		h1.text_arr_4[i].setFillColor(sf::Color::Black);
-		
-		string d=(to_string(it->Date.day) + '/' + to_string(it->Date.month )+ '/' + to_string(it->Date.year )+ "   " + to_string(it->Date.hour) + ':' + to_string(it->Date.min));
+
+		string d = (to_string(it->Date.day) + '/' + to_string(it->Date.month) + '/' + to_string(it->Date.year) + "   " + to_string(it->Date.hour) + ':' + to_string(it->Date.min));
 		h1.text_arr_8[i].setString(d);
 		h1.text_arr_8[i].setFont(berlinSansFont);
 		h1.text_arr_8[i].setCharacterSize(20);
@@ -3893,7 +4025,7 @@ void user_edit_profile(User& ali)
 {
 	//texturesandfonts();
 	half h1;
-	user_edit_profile_set(h1,ali);
+	user_edit_profile_set(h1, ali);
 
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = user_icon.getPosition();
@@ -3945,7 +4077,7 @@ void user_edit_profile(User& ali)
 				else
 					profile_edit.setScale(0.2f, 0.2f);
 
-				
+
 
 				if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					back.setScale(0.165, 0.165); // Scale up
@@ -3983,7 +4115,7 @@ void user_edit_profile(User& ali)
 					h1.text10.setCharacterSize(28); // Scale up
 				else
 					h1.text10.setCharacterSize(26);
-				
+
 				if (balance.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					balance.setScale(0.165f, 0.165f); // Scale up
 				else
@@ -4000,7 +4132,7 @@ void user_edit_profile(User& ali)
 				else
 					h1.button_2.setScale(0.11, 0.1);
 
-				
+
 
 
 			}
@@ -4025,7 +4157,7 @@ void user_edit_profile(User& ali)
 				window.clear();
 				return user_edit_password(ali);
 			}
-			
+
 
 		}
 
@@ -4078,7 +4210,7 @@ void user_edit_profile_set(half& h1, User& ali)
 	background.setTexture(background_texture);
 	background.setScale(1.5, 1.5);
 
-	
+
 
 	user_icon.setTexture(user_icon_texture);
 	user_icon.setScale(0.2, 0.2);
@@ -4089,7 +4221,7 @@ void user_edit_profile_set(half& h1, User& ali)
 	profile_edit.setPosition(550, 300);
 
 
-	
+
 
 	back.setTexture(back_texture);
 	back.setScale(0.15, 0.15);
@@ -4158,7 +4290,7 @@ void user_edit_profile_set(half& h1, User& ali)
 	h1.button_2.setScale(0.11, 0.1);
 	h1.button_2.setPosition(700, 500);
 
-	
+
 
 }
 void user_edit_profile_draw(half& h1)
@@ -4190,7 +4322,7 @@ void user_edit_username(User& ali)
 {
 	//texturesandfonts();
 	half h1;
-	user_edit_username_set(h1,ali);
+	user_edit_username_set(h1, ali);
 
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = user_icon.getPosition();
@@ -4265,7 +4397,7 @@ void user_edit_username(User& ali)
 				else
 					h1.text4.setCharacterSize(24);
 
-				
+
 				if (h1.text9.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					h1.text9.setCharacterSize(20); // Scale up
 				else
@@ -4304,7 +4436,7 @@ void user_edit_username(User& ali)
 					h1.button_1.setScale(0.11, 0.1);
 
 			}
-			
+
 			if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
 				window.clear();
@@ -4348,7 +4480,7 @@ void user_edit_username(User& ali)
 		window.draw(h1.text1);
 		window.draw(h1.text2);
 		window.draw(user_icon);
-		
+
 		// Display the window
 		window.display();
 
@@ -4461,7 +4593,7 @@ void user_edit_username_draw(half& h1)
 	window.draw(user_icon);
 	window.draw(profile_edit);
 
-	
+
 	window.draw(back);
 
 	window.draw(h1.textfiled_1);
@@ -4653,7 +4785,7 @@ void user_edit_password(User& ali)
 		window.draw(h1.text1);
 		window.draw(h1.text2);
 		window.draw(user_icon);
-		
+
 		// Display the window
 		window.display();
 
@@ -4766,7 +4898,7 @@ void user_edit_password_draw(half& h1)
 	window.draw(user_icon);
 	window.draw(profile_edit);
 
-	
+
 	window.draw(back);
 
 	window.draw(h1.textfiled_1);
@@ -5032,7 +5164,7 @@ void admin(Admin& ali)
 		window.draw(h1.text1);
 		window.draw(h1.text2);
 		window.draw(admin_icon);
-		window.draw(person);
+
 		// Display the window
 		window.display();
 
@@ -5176,7 +5308,7 @@ void Admin_draw(half& h1)
 	window.draw(background);
 	window.draw(h1.half_background);
 
-	window.draw(wallet_icon);
+
 	//window.draw(profile_edit);
 	//window.draw(admin_icon);
 
@@ -5204,7 +5336,7 @@ void Admin_draw(half& h1)
 
 }
 
-void admin_edit_user(Admin &ali)
+void admin_edit_user(Admin& ali)
 
 {
 	//texturesandfonts();
@@ -5250,7 +5382,7 @@ void admin_edit_user(Admin &ali)
 			if (true) {
 
 
-				
+
 				if (admin_icon.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					admin_icon.setScale(0.22f, 0.22f); // Scale up
 				else
@@ -5290,12 +5422,12 @@ void admin_edit_user(Admin &ali)
 
 				if (h1.text5.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					h1.text5.setCharacterSize(25); // Scale up
-				else	   
+				else
 					h1.text5.setCharacterSize(24);
 
 				if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					h1.button_1.setScale(0.111, 0.11); // Scale up
-				else   
+				else
 					h1.button_1.setScale(0.11, 0.1);
 
 				if (h1.button_2.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
@@ -5308,7 +5440,7 @@ void admin_edit_user(Admin &ali)
 				else
 					h1.button_3.setScale(0.11, 0.1);
 
-				
+
 
 			}
 			/*if (logout.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
@@ -5321,7 +5453,7 @@ void admin_edit_user(Admin &ali)
 				window.clear();
 				return admin(ali);
 			}
-			
+
 			if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
 				window.clear();
@@ -5439,7 +5571,7 @@ void admin_edit_user_set(half& h1)
 	h1.text5.setPosition(840, 505);
 	h1.text5.setFillColor(sf::Color::White);
 
-	
+
 	h1.button_1.setTexture(button_texture);
 	h1.button_1.setScale(0.11, 0.1);
 	h1.button_1.setPosition(130, 500);
@@ -5473,11 +5605,11 @@ void admin_edit_user_draw(half& h1)
 	window.draw(h1.text5);
 
 
-	
+
 
 }
 
-void admin_edit_username_of_user(Admin &ali)
+void admin_edit_username_of_user(Admin& ali)
 
 {
 	//texturesandfonts();
@@ -5521,7 +5653,7 @@ void admin_edit_username_of_user(Admin &ali)
 
 			// Check if mouse is over specific sprites and adjust scale accordingly
 			if (true) {
-				
+
 				if (admin_icon.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					admin_icon.setScale(0.22f, 0.22f); // Scale up
 				else
@@ -5567,9 +5699,9 @@ void admin_edit_username_of_user(Admin &ali)
 				else
 					h1.textfiled_3.setScale(0.1, 0.1);
 
-				
 
-				
+
+
 				if (h1.text11.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					h1.text11.setCharacterSize(25); // Scale up
 				else
@@ -5686,7 +5818,7 @@ void admin_edit_username_of_user_set(half& h1)
 	h1.text4.setPosition(630, 467);
 	h1.text4.setFillColor(sf::Color::White);
 
-	
+
 
 	h1.textfiled_2.setTexture(text_field_texture);
 	h1.textfiled_2.setScale(0.1, 0.1);
@@ -5730,7 +5862,7 @@ void admin_edit_username_of_user_draw(half& h1)
 	window.draw(h1.text6);
 	window.draw(h1.text7);
 	window.draw(h1.text8);*/
-	
+
 	window.draw(h1.text11);
 
 	/*window.draw(send);
@@ -5958,7 +6090,7 @@ void admin_edit_password_of_user_set(half& h1)
 	h1.textfiled_3.setScale(0.1, 0.1);
 	h1.textfiled_3.setPosition(850, 460);
 
-	
+
 
 	h1.text11.setString("Change Password");
 	h1.text11.setFont(berlinSansFont);
@@ -6531,7 +6663,7 @@ void admin_reactivate_user(Admin& ali)
 	//texturesandfonts();
 	half h1;
 	admin_reactivate_user_set(h1);
-	
+
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = admin_icon.getPosition();
 	float initialYPosition = 800; // Initial position below the window
@@ -7110,15 +7242,15 @@ void admin_add_user(Admin& ali)
 					h1.text4.setCharacterSize(26); // Scale up
 				else
 					h1.text4.setCharacterSize(24);
-				
+
 				if (h1.text5.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					h1.text5.setCharacterSize(26); // Scale up
-				else	   
+				else
 					h1.text5.setCharacterSize(24);
-				
+
 				if (h1.text6.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					h1.text6.setCharacterSize(26); // Scale up
-				else	   
+				else
 					h1.text6.setCharacterSize(24);
 
 				if (h1.textfiled_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
@@ -7150,7 +7282,7 @@ void admin_add_user(Admin& ali)
 					h1.button_1.setScale(0.11, 0.1);
 
 			}
-			
+
 			if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
 				window.clear();
@@ -7292,7 +7424,7 @@ void admin_add_user_draw(half& h1)
 	window.draw(h1.textfiled_1);
 	window.draw(h1.textfiled_2);
 	window.draw(h1.textfiled_3);
-	
+
 	window.draw(h1.button_1);
 
 	window.draw(h1.text1);
@@ -7334,7 +7466,7 @@ void admin_all_transactions(Admin& ali)
 
 	//texturesandfonts();
 //size_of_arr = System::allTransactions.size();
-	admin_all_transactions_set(h1,ali);
+	admin_all_transactions_set(h1, ali);
 
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = admin_icon.getPosition();
@@ -7420,7 +7552,7 @@ void admin_all_transactions(Admin& ali)
 				else
 					h1.text3.setCharacterSize(24);
 
-				
+
 
 				for (int i = 0; i < System::allTransactions.size(); i++)
 				{
@@ -7575,19 +7707,19 @@ void admin_all_transactions(Admin& ali)
 			transiction_history.setPosition(550, 230);
 
 		}
-		
-		if(System::allTransactions.empty())
+
+		if (System::allTransactions.empty())
 		{
 			if (clock.getElapsedTime().asSeconds() < animationTimeX2)
 			{
 				float elapsedTimeX2 = clock.getElapsedTime().asSeconds();
-				float newXPosition2 = initialPosition2 + (distanceToMoveX2 * (elapsedTimeX2/ animationTimeX2));
+				float newXPosition2 = initialPosition2 + (distanceToMoveX2 * (elapsedTimeX2 / animationTimeX2));
 				h1.text10.setPosition(newXPosition2 + 400, 450);
 
 			}
 			else
 			{
-				h1.text10.setPosition( 400, 450);
+				h1.text10.setPosition(400, 450);
 
 			}
 		}
@@ -7711,7 +7843,7 @@ void admin_all_transactions_set(half& h1, Admin& ali)
 		h1.frame_background_arr[i].setTexture(background_frame_texture);
 		h1.frame_background_arr[i].setScale(0.47, 0.35);
 		h1.frame_background_arr[i].setPosition(30, 360 + i * 160);
-		
+
 		h1.textfiled_arr_3[i].setTexture(text_field_texture);
 		h1.textfiled_arr_3[i].setScale(0.1, 0.08);
 		h1.textfiled_arr_3[i].setPosition(300, 443 + i * 160);
@@ -7843,7 +7975,7 @@ void admin_all_transactions_draw(half& h1)
 	//window.draw(h1.text6);
 	//window.draw(h1.text7);
 	//window.draw(h1.text8);*/
-	
+
 
 
 }
@@ -8005,16 +8137,16 @@ void admin_all_users(Admin& ali)
 
 					if (h1.text_arr_5[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 						h1.text_arr_5[i].setCharacterSize(27);// Scale up
-					else			
+					else
 						h1.text_arr_5[i].setCharacterSize(25);
 
 					if (h1.text_arr_6[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 						h1.text_arr_6[i].setCharacterSize(23);// Scale up
-					else			
+					else
 						h1.text_arr_6[i].setCharacterSize(22);
 				}
 
-				//}
+				
 
 				if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
@@ -8035,24 +8167,19 @@ void admin_all_users(Admin& ali)
 					}
 				}
 			}
-			if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-			{
-				window.clear();
-				return admin(ali);
-			}
+			
 			auto it = System::allUsers.begin();
 			for (int i = 0; i < System::allUsers.size(); i++)
 			{
 				if (h1.button_1_arr[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
 					window.clear();
-					//return admin_User_transactions(ali,System::allUsers[h1.text_arr_3->getString()]);
 					return admin_User_transactions(ali, it->second);
 
 				}
 				it++;
 			}
-			
+
 
 		}
 		window.clear();
@@ -8113,13 +8240,13 @@ void admin_all_users(Admin& ali)
 
 			}
 		}
-		
-		float movementDelay = 0.2f; 
+
+		float movementDelay = 0.2f;
 
 
 		float totalAnimationTime = System::allUsers.size() * movementDelay + animationTimeX2;
 
-		
+
 		for (int i = 0; i < System::allUsers.size(); i++)
 		{
 			// Calculate the delay for this element based on its index
@@ -8210,7 +8337,7 @@ void admin_all_users_set(half& h1)
 	background.setScale(1.5, 3);
 	background.setPosition(0, -500);
 
-	auto it = System::allUsers .begin();
+	auto it = System::allUsers.begin();
 	for (int i = 0; i < System::allUsers.size(); i++)
 	{
 
@@ -8230,13 +8357,13 @@ void admin_all_users_set(half& h1)
 		h1.textfiled_arr_2[i].setScale(0.08, 0.08);
 		h1.textfiled_arr_2[i].setPosition(850, 385 + i * 160);
 
-		h1.text_arr_5[i].setString("# "+to_string(i+1));
+		h1.text_arr_5[i].setString("# " + to_string(i + 1));
 		h1.text_arr_5[i].setFont(berlinSansFont);
 		h1.text_arr_5[i].setCharacterSize(25);
 		h1.text_arr_5[i].setPosition(550, 380 + i * 160);
 		h1.text_arr_5[i].setFillColor(sf::Color::White);
 
-		h1.text_arr_6[i].setString("Transictions of "+it->first);
+		h1.text_arr_6[i].setString("Transictions of " + it->first);
 		h1.text_arr_6[i].setFont(berlinSansFont);
 		h1.text_arr_6[i].setCharacterSize(22);
 		h1.text_arr_6[i].setPosition(530, 465 + i * 160);
@@ -8336,7 +8463,7 @@ void admin_all_users_draw(half& h1)
 
 }
 
-void admin_User_transactions(Admin& ali, User &omar)
+void admin_User_transactions(Admin& ali, User& omar)
 
 {
 	half h1;
@@ -8359,7 +8486,7 @@ void admin_User_transactions(Admin& ali, User &omar)
 
 	//texturesandfonts();
 //size_of_arr = omar.History.size();
-	admin_User_transactions_set(h1, ali,omar);
+	admin_User_transactions_set(h1, ali, omar);
 
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = admin_icon.getPosition();
@@ -8394,6 +8521,8 @@ void admin_User_transactions(Admin& ali, User &omar)
 	// Create a clock to measure time
 	sf::Clock clock;
 	sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
+	
+	
 	// Event loop
 	while (window.isOpen())
 	{
@@ -8444,30 +8573,30 @@ void admin_User_transactions(Admin& ali, User &omar)
 					h1.text3.setCharacterSize(32); // Scale up
 				else
 					h1.text3.setCharacterSize(30);
-				
+
 				if (h1.text4.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					h1.text4.setCharacterSize(28); // Scale up
-				else	   
+				else
 					h1.text4.setCharacterSize(26);
-				
+
 				if (h1.text5.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					h1.text5.setCharacterSize(28); // Scale up
-				else	   
+				else
 					h1.text5.setCharacterSize(26);
 
 				if (h1.text6.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					h1.text6.setCharacterSize(28); // Scale up
-				else	   
+				else
 					h1.text6.setCharacterSize(26);
 
 				if (h1.textfiled_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-					h1.textfiled_1.setScale(0.1,0.088); // Scale up
+					h1.textfiled_1.setScale(0.1, 0.088); // Scale up
 				else
 					h1.textfiled_1.setScale(0.1, 0.08);
 
 				if (h1.textfiled_2.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					h1.textfiled_2.setScale(0.08, 0.088); // Scale up
-				else			 
+				else
 					h1.textfiled_2.setScale(0.08, 0.08);
 
 				for (int i = 0; i < omar.History.size(); i++)
@@ -8572,16 +8701,11 @@ void admin_User_transactions(Admin& ali, User &omar)
 					}
 				}
 			}
-			if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-			{
-				window.clear();
-				return admin_all_users(ali);
-			}
 
 		}
 		window.clear();
 
-		admin_User_transactions_draw(h1,omar);
+		admin_User_transactions_draw(h1, omar);
 
 		//Calculate the new position of the sprites based on elapsed time for x-axis transition
 		if (clock.getElapsedTime().asSeconds() < animationTimeX)
@@ -8594,7 +8718,7 @@ void admin_User_transactions(Admin& ali, User &omar)
 			//profile_edit.setPosition(950 - newXPosition, 80);
 			//h1.text3.setPosition(950 - newXPosition, 180);
 			back.setPosition(1050 - newXPosition, 240);
-			
+
 
 		}
 		else
@@ -8604,7 +8728,7 @@ void admin_User_transactions(Admin& ali, User &omar)
 			h1.text2.setPosition(finalXPosition + 165, 130); // Adjust position of text2
 			admin_icon.setPosition(finalXPosition + 50, 80);
 			back.setPosition(1050, 240);
-			
+
 
 		}
 		if (clock.getElapsedTime().asSeconds() < animationTimeX2)
@@ -8745,7 +8869,7 @@ void admin_User_transactions(Admin& ali, User &omar)
 
 	}
 }
-void admin_User_transactions_set(half& h1, Admin& ali, User &omar)
+void admin_User_transactions_set(half& h1, Admin& ali, User& omar)
 {
 
 	background.setTexture(background_texture);
@@ -8828,11 +8952,11 @@ void admin_User_transactions_set(half& h1, Admin& ali, User &omar)
 		h1.text_arr_8[i].setCharacterSize(20);
 		h1.text_arr_8[i].setPosition(865, 446 + i * 160);
 		h1.text_arr_8[i].setFillColor(sf::Color::Black);
-		if (it->sender == omar.UserName) 
+		if (it->sender == omar.UserName)
 		{
 			h1.text_arr_3[i].setFillColor(sf::Color::Blue);
 		}
-		else if (it->reciever == omar.UserName) 
+		else if (it->reciever == omar.UserName)
 		{
 			h1.text_arr_6[i].setFillColor(sf::Color::Blue);
 		}
@@ -8896,7 +9020,7 @@ void admin_User_transactions_set(half& h1, Admin& ali, User &omar)
 	h1.text6.setCharacterSize(26);
 	h1.text6.setPosition(215, 300);
 	h1.text6.setFillColor(sf::Color::Black);
-	
+
 	h1.textfiled_1.setTexture(text_field_texture);
 	h1.textfiled_1.setScale(0.1, 0.08);
 	h1.textfiled_1.setPosition(200, 250);
@@ -8905,7 +9029,7 @@ void admin_User_transactions_set(half& h1, Admin& ali, User &omar)
 	h1.textfiled_2.setScale(0.08, 0.08);
 	h1.textfiled_2.setPosition(200, 300);
 
-	if (System::allTransactions.empty())
+	if (omar.History.empty())
 	{
 		h1.text10.setString("There is no Transactions\n       to be displayed");
 		h1.text10.setFont(britanicFont);
@@ -8914,7 +9038,7 @@ void admin_User_transactions_set(half& h1, Admin& ali, User &omar)
 		h1.text10.setFillColor(Color::Blue);
 	}
 }
-void admin_User_transactions_draw(half& h1, User &omar)
+void admin_User_transactions_draw(half& h1, User& omar)
 {
 	window.draw(background);
 	window.draw(h1.half_background);

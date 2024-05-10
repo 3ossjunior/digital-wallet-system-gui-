@@ -1,8 +1,52 @@
+History:aliii|mamadou|20.000|0
+
+History:mamadou|aliii|100.000|0
+
 aliii|1234569|100000000.000|0
+History:mamadou|aliii|10.000|14,16,10,5,2024
+History:mamadou|aliii|50.000|14,16,10,5,2024
+History:mamadou|aliii|20.000|14,16,10,5,2024
+History:mamadou|aliii|10.000|14,16,10,5,2024
+History:mamadou|aliii|10.000|14,16,10,5,2024
+History:mamadou|aliii|1000.000|14,16,10,5,2024
+History:mamadou|aliii|20.000|14,16,10,5,2024
+History:mamadou|aliii|20.000|14,16,10,5,2024
+History:mamadou|aliii|200.000|14,16,10,5,2024
+History:mamadou|aliii|20.000|14,16,10,5,2024
+History:aliii|mamadou|200.000|14,16,10,5,2024
+History:mamadou|aliii|20.000|14,16,10,5,2024
+History:aliii|mamadou|20.000|14,16,10,5,2024
+History:mamadou|aliii|20.000|14,16,10,5,2024
+History:aliii|mamadou|20.000|14,16,10,5,2024
+History:mamadou|aliii|100.000|14,16,10,5,2024
+History:mamadou|aliii|1000.000|14,16,10,5,2024
+History:aliii|mamadou|20.000|14,16,10,5,2024
+History:mamadou|aliii|100.000|14,16,10,5,2024
+History:mamadou|aliii|100.000|14,16,10,5,2024
 
 lesgo|1234|10000000.000|0
 
 mamadou|12345|1000000.000|0
+History:mamadou|aliii|10.000|14,16,10,5,2024
+History:mamadou|aliii|50.000|14,16,10,5,2024
+History:mamadou|aliii|20.000|14,16,10,5,2024
+History:mamadou|aliii|10.000|14,16,10,5,2024
+History:mamadou|aliii|10.000|14,16,10,5,2024
+History:mamadou|aliii|1000.000|14,16,10,5,2024
+History:mamadou|aliii|20.000|14,16,10,5,2024
+History:mamadou|aliii|20.000|14,16,10,5,2024
+History:mamadou|aliii|200.000|14,16,10,5,2024
+History:mamadou|aliii|20.000|14,16,10,5,2024
+History:aliii|mamadou|200.000|14,16,10,5,2024
+History:mamadou|aliii|20.000|14,16,10,5,2024
+History:aliii|mamadou|20.000|14,16,10,5,2024
+History:mamadou|aliii|20.000|14,16,10,5,2024
+History:aliii|mamadou|20.000|14,16,10,5,2024
+History:mamadou|aliii|100.000|14,16,10,5,2024
+History:mamadou|aliii|1000.000|14,16,10,5,2024
+History:aliii|mamadou|20.000|14,16,10,5,2024
+History:mamadou|aliii|100.000|14,16,10,5,2024
+History:mamadou|aliii|100.000|14,16,10,5,2024
 
 medhat|1234567|10000000.000|0
 
