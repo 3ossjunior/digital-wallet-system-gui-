@@ -4,12 +4,13 @@
 #include <vector>
 #include "Transaction.h"
 #include <map>
-#include <queue>
+#include <list>
 #include "Admin.h"
 #include "System.h"
 #include <string>
 #include<algorithm>
 #include <sstream>
+
 #include <deque>
 
 using namespace std;
@@ -21,7 +22,7 @@ public:
 	double balance;
 	Transaction transactions;
 	vector <Transaction> History;
-	deque<Transaction> pendingRequests;
+	list<Transaction> pendingRequests;
 
 public:
 
@@ -36,11 +37,11 @@ public:
 	string getpassword();
 	double ViewCurrentBalance();
 	void userData();
-	void Send();
+	void Send(string,double);
 	void RequestMoney(string& sender, double amount);
 	void acceptRequest(Transaction transaction);
 	void addTransactionToHistory(Transaction transaction);
-
+	void Reject(Transaction);
 	void addPendingRequest(Transaction transaction);
 
 
@@ -50,8 +51,8 @@ public:
 	bool CheckBalance(double amount);
 	void CheckOut(string reeciever);
 	void BalanceAfterTransaction(double newBalance);
-	void editUsername();
-	void editPassword();
+	void editUsername(string);
+	void editPassword(string);
 	void viewPendingRequests();
 	void ViewHistory();
 	~User();

@@ -111,6 +111,10 @@ string Transaction::serializeToString() const
 Transaction Transaction::deserializeFromString(string& str)
 {
 	try {
+		if (str == "EMPTY") { // If the string indicates an empty transaction
+			return Transaction(); // Return an empty transaction object
+		}
+
 		size_t pos1 = str.find('|');
 		if (pos1 == string::npos)
 			throw invalid_argument("Invalid serialized Transaction string format: Missing sender");
@@ -137,7 +141,6 @@ Transaction Transaction::deserializeFromString(string& str)
 		throw runtime_error("Error deserializing Transaction: " + string(e.what()));
 	}
 }
-
 
 
 

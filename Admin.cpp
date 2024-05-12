@@ -48,10 +48,10 @@ void Admin::view_Accounts_Data()
 	}
 }
 
-void Admin::edit_username(string name)
+void Admin::edit_username(string name,string new_name )
 {
 	User* f = System::getUser(name);
-	if (!System::search_user(name))
+	/*if (!System::search_user(name))
 	{
 		cout << "The Username you Entered Does Not Exist !\n Please Enter the Username of The User To Edit His Username :\t";
 		cin >> name;
@@ -65,7 +65,7 @@ void Admin::edit_username(string name)
 	{
 		cout << "The Username Must be a Unique Name :\n";
 		return edit_username(name);
-	}
+	}*/
 	{
 		for (int i = 0; i < System::allTransactions.size(); i++) {
 			if (System::allTransactions[i].getSender() == name) {
@@ -94,50 +94,54 @@ void Admin::edit_username(string name)
 			}
 		}
 	}
-	System::allUsers[new_name] = System::allUsers[name];
+	User userrr = System::allUsers[name];
+
+	userrr.UserName = new_name;
 	System::allUsers.erase(name);
+
+	System::allUsers[new_name] = userrr;
 
 	cout << "the Username has been Changed Sucessfully \n";
 }
 
-void Admin::edit_password(string name)
+void Admin::edit_password(string name,string new_pass)
 {
-	if (!System::search_user(name))
+	/*if (!System::search_user(name))
 	{
 		cout << "The Username you Entered Does Not Exist !\n Please Enter the Username of The User To Edit His Username :\t";
 		cin >> name;
 		return edit_password(name);
-	}
-	string new_pass;
+	}*/
+	/*string new_pass;
 	cout << "Please Enter The New Password :\t";
-	cin >> new_pass;
+	cin >> new_pass;*/
 	
 	System::allUsers[name].setpassword(System::sha256(new_pass));
 	cout << "the Password has been Changed Successfully \n";
 	return;
 }
 
-void Admin::add_user()
+void Admin::add_user(string username,string password,double balance)
 {
-	string username;
+	/*string username;
 	cout << "Enter username :";
-	cin >> username;
-	if (System::allUsers.find(username) != System::allUsers.end()) {
-		cout << "User '" << username << "' already exists." << endl;
-		return add_user();
-	}
-	else {
-		string password;
+	cin >> username;*/
+	//if (System::allUsers.find(username) != System::allUsers.end()) {
+	//	cout << "User '" << username << "' already exists." << endl;
+	//	/*return add_user();*/
+	//}
+	//else {
+		/*string password;
 		double balance;
 		cout << "Enter password :";
 		cin >> password;
 		cout << "enter balance :";
-		cin >> balance;
+		cin >> balance;*/
 
 		User user(username, password, balance);
 		System::allUsers[username] = user;
 		cout << "User '" << username << "' added successfully." << endl;
-	}
+	//}
 }
 
 void Admin::delete_user()
@@ -156,9 +160,9 @@ void Admin::delete_user()
 	cout << "The User Has Been Deleted Successfully\n";
 }
 
-void Admin::suspend_user()
+void Admin::suspend_user(string username)
 {
-	string name;
+	/*string name;
 
 	cout << "Please Enter The Username of the User You Want to Suspend :\t";
 	cin >> name;
@@ -166,19 +170,19 @@ void Admin::suspend_user()
 	{
 		cout << "the username does not exist !\n\n ";
 		return suspend_user();
-	}
-	if (System::allUsers[name].suspended) {
+	}*/
+	/*if (System::allUsers[name].suspended) {
 		cout << "the user is already suspended\n\n";
 	}
-	else {
-		System::allUsers[name].suspended = true;
+	else {*/
+		System::allUsers[username].suspended = true;
 		cout << "The User Has Been Suspended Successfully\n";
-	}
+	//}
 }
 
-void Admin::reactivated()
+void Admin::reactivated(string username)
 {
-	string name;
+	/*string name;
 
 	cout << "Please Enter The Username of the User You Want to Suspend :\t";
 
@@ -186,14 +190,14 @@ void Admin::reactivated()
 	if (!System::search_user(name))
 	{
 		cout << "the username does not exist !\n\n ";
-		return suspend_user();
-	}
-	if (System::allUsers[name].suspended) {
-		System::allUsers[name].suspended = false;
+		return suspend_user(name);
+	}*/
+	/*if (System::allUsers[name].suspended) {*/
+		System::allUsers[username].suspended = false;
 		cout << "The User Has Been reactivated Successfully\n";
-	}
-	else
-		cout << "the user is not suspended\n\n";
+	//}
+	/*else
+		cout << "the user is not suspended\n\n";*/
 }
 
 void Admin::view_all_transactions()
@@ -210,16 +214,16 @@ void Admin::view_all_transactions()
 
 }
 
-void Admin::edit_balance(string name)
+void Admin::edit_balance(string name,double new_balance)
 {
 
-	if (!System::search_user(name))
+	/*if (!System::search_user(name))
 	{
 		cout << "The Username you Entered Does Not Exist !\n";
 		cin >> name;
 		return edit_balance(name);
-	}
-	double new_balance;
+	}*/
+	/*double new_balance;
 	cout << "Please Enter The Nem Balance :\t";
 	cin >> new_balance;
 
@@ -227,7 +231,7 @@ void Admin::edit_balance(string name)
 	{
 		cout << "the balance must be a valid number !\n";
 		return edit_balance(name);
-	}
+	}*/
 	System::allUsers[name].setbalance(new_balance);
 
 	cout << "The User Balance Has Been Modified \n";

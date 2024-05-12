@@ -198,6 +198,11 @@ void System::readUsersFromFile()
     while (getline(file, line)) {
         try {
             User user = User::deserializeFromString(line);
+            
+        	if(user.UserName=="Not good user")
+        	{
+        		continue;
+        	}
             allUsers[user.getUserName()] = user;
             // cout << "Read user: " << user.getUserName() << endl;
         }
@@ -221,6 +226,7 @@ void System::writeUsersToFile()
     // Write each user from allUsers map to file
     for (const auto& pair : allUsers) {
         const User& user = pair.second;
+      
         string userData = user.serializeToString();
         file << userData << endl;
         //cout << "added\n";
@@ -243,12 +249,12 @@ void System::editeUser()
         switch (choice) {
         case 1: {
 
-            System::loggedInUser->editUsername();
+           // System::loggedInUser->editUsername();
             break;
         }
         case 2: {
 
-            System::loggedInUser->editPassword();
+          //  System::loggedInUser->editPassword();
             break;
         }
         case 3:
@@ -264,7 +270,7 @@ void System::editeUser()
 }
 
 
-bool System::Register(string username, string password) {
+bool System::Register(string username, string password,double balance) {
 
 
 
@@ -275,7 +281,7 @@ bool System::Register(string username, string password) {
 
     //   password= SecureString();
 
-    User user(username, sha256(password), 0);
+    User user(username, sha256(password), balance);
     allUsers[username] = user;
     cout << "User '" << username << "' registered successfully." << endl;
     System::loggedInUser = &System::allUsers[username];
@@ -333,12 +339,13 @@ bool System::Login(string username, string password) {
         cout << "User '" << username << "' logged in successfully." << endl;
         return true;
     }
-    else {
+    else return false;
+    /*else {
         cout << "Invalid username or email. Login failed.\npress 0 to exit and others to retry" << endl;
 
         return false;
 
-    }
+    }*/
 }
 void System::Logout() {
 

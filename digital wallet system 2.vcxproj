@@ -81,6 +81,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -105,13 +106,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\programs\visual studio\projects\digital wallet system 2\sfml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\iShop\source\repos\digital-wallet-system-gui-\sfml\include;C:\Users\iShop\Desktop\vcpkg\vcpkg\packages\cryptopp_x64-windows\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\programs\visual studio\projects\digital wallet system 2\sfml\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\iShop\source\repos\digital-wallet-system-gui-\sfml\lib;C:\Users\iShop\Desktop\vcpkg\vcpkg\packages\cryptopp_x64-windows\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -122,15 +123,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\programs\visual studio\projects\digital wallet system 2\sfml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\iShop\source\repos\digital-wallet-system-gui-\sfml\include;C:\Users\iShop\Desktop\vcpkg\vcpkg\packages\cryptopp_x64-windows\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\programs\visual studio\projects\digital wallet system 2\sfml\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system.lib;sfml-graphics.lib;sfml-audio.lib;sfml-network.lib;sfml-window.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\iShop\source\repos\digital-wallet-system-gui-\sfml\lib;C:\Users\iShop\Desktop\vcpkg\vcpkg\packages\cryptopp_x64-windows\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;sfml-network.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -146,18 +147,15 @@
     <ClInclude Include="Transaction.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="packages\vcpkg.C.Users.AliMadian.OneDrive.Desktop.VCPKG.vcpkg.1.0.0\build\native\vcpkg.C.Users.AliMadian.OneDrive.Desktop.VCPKG.vcpkg.targets" Condition="Exists('packages\vcpkg.C.Users.AliMadian.OneDrive.Desktop.VCPKG.vcpkg.1.0.0\build\native\vcpkg.C.Users.AliMadian.OneDrive.Desktop.VCPKG.vcpkg.targets')" />
+    <Import Project="C:\Users\iShop\Desktop\vcpkg\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets" Condition="Exists('C:\Users\iShop\Desktop\vcpkg\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\vcpkg.C.Users.AliMadian.OneDrive.Desktop.VCPKG.vcpkg.1.0.0\build\native\vcpkg.C.Users.AliMadian.OneDrive.Desktop.VCPKG.vcpkg.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\vcpkg.C.Users.AliMadian.OneDrive.Desktop.VCPKG.vcpkg.1.0.0\build\native\vcpkg.C.Users.AliMadian.OneDrive.Desktop.VCPKG.vcpkg.props'))" />
-    <Error Condition="!Exists('packages\vcpkg.C.Users.AliMadian.OneDrive.Desktop.VCPKG.vcpkg.1.0.0\build\native\vcpkg.C.Users.AliMadian.OneDrive.Desktop.VCPKG.vcpkg.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\vcpkg.C.Users.AliMadian.OneDrive.Desktop.VCPKG.vcpkg.1.0.0\build\native\vcpkg.C.Users.AliMadian.OneDrive.Desktop.VCPKG.vcpkg.targets'))" />
+    <Error Condition="!Exists('C:\Users\iShop\Desktop\vcpkg\vcpkg\scripts\buildsystems\msbuild\vcpkg.props')" Text="$([System.String]::Format('$(ErrorText)', 'C:\Users\iShop\Desktop\vcpkg\vcpkg\scripts\buildsystems\msbuild\vcpkg.props'))" />
+    <Error Condition="!Exists('C:\Users\iShop\Desktop\vcpkg\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets')" Text="$([System.String]::Format('$(ErrorText)', 'C:\Users\iShop\Desktop\vcpkg\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets'))" />
   </Target>
 </Project>

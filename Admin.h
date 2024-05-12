@@ -25,17 +25,17 @@ public:
 
 	void view_Accounts_Data();
 
-	static  void edit_username(string name);
-	static void edit_password(string name);
-	void add_user();
+	static  void edit_username(string name,string);
+	static void edit_password(string name,string);
+	void add_user(string,string,double);
 	void delete_user();
 
-	void suspend_user();
-	void reactivated();
+	void suspend_user(string);
+	void reactivated(string);
 
 	void view_all_transactions();
 
-	void edit_balance(string name);
+	void edit_balance(string name,double);
 	~Admin();
 };
 
