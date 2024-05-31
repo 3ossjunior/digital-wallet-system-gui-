@@ -198,11 +198,11 @@ void System::readUsersFromFile()
     while (getline(file, line)) {
         try {
             User user = User::deserializeFromString(line);
-            
-        	if(user.UserName=="Not good user")
-        	{
-        		continue;
-        	}
+
+            if (user.UserName == "Not good user")
+            {
+                continue;
+            }
             allUsers[user.getUserName()] = user;
             // cout << "Read user: " << user.getUserName() << endl;
         }
@@ -226,7 +226,7 @@ void System::writeUsersToFile()
     // Write each user from allUsers map to file
     for (const auto& pair : allUsers) {
         const User& user = pair.second;
-      
+
         string userData = user.serializeToString();
         file << userData << endl;
         //cout << "added\n";
@@ -249,12 +249,12 @@ void System::editeUser()
         switch (choice) {
         case 1: {
 
-           // System::loggedInUser->editUsername();
+            // System::loggedInUser->editUsername();
             break;
         }
         case 2: {
 
-          //  System::loggedInUser->editPassword();
+            //  System::loggedInUser->editPassword();
             break;
         }
         case 3:
@@ -270,7 +270,7 @@ void System::editeUser()
 }
 
 
-bool System::Register(string username, string password,double balance) {
+bool System::Register(string username, string password, double balance) {
 
 
 
