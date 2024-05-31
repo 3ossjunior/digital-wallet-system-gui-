@@ -37,7 +37,7 @@ public:
 	string getpassword();
 	double ViewCurrentBalance();
 	void userData();
-	void Send(string,double);
+	void Send(string, double);
 	void RequestMoney(string& sender, double amount);
 	void acceptRequest(Transaction transaction);
 	void addTransactionToHistory(Transaction transaction);
@@ -51,8 +51,8 @@ public:
 	bool CheckBalance(double amount);
 	void CheckOut(string reeciever);
 	void BalanceAfterTransaction(double newBalance);
-	void editUsername(string);
-	void editPassword(string);
+	void editUsername(string &);
+	void editPassword(string &);
 	void viewPendingRequests();
 	void ViewHistory();
 	~User();
