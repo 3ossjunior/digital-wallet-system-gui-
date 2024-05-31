@@ -147,4 +147,3 @@ Transaction Transaction::deserializeFromString(string& str)
 Transaction::~Transaction()
 {
 }
-
