@@ -13,16 +13,19 @@
 #include<cryptopp/cryptlib.h>
 
 using namespace CryptoPP;
+
 using namespace std;
 using namespace sf;
 
 
-Admin ali("Madian", "123456");
+Admin ali("admin", "admin");
 User omar("omar", "123123", 402.279);
 User amr("amr", "123123", 999999);
 User osama("osama", "123123", 999999);
 
 RenderWindow window(sf::VideoMode(1200, 800), "Digital Wallet System", Style::Default);
+
+sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
 
 Font rokebFint, britanicFont, berlinSansFont;
 Texture headertexture, button_texture, background_texture, darkbackground_texture, text_field_texture
@@ -70,7 +73,7 @@ struct half
 	Text* text_arr_6;
 	Text* text_arr_7;
 	Text* text_arr_8;
-	
+
 
 };
 struct halfvec
@@ -104,7 +107,7 @@ struct halfvec
 	std::vector<sf::Text> text_arr_6;
 	std::vector<sf::Text> text_arr_7;
 	std::vector<sf::Text> text_arr_8;
-	
+
 };
 
 void texturesandfonts();
@@ -381,7 +384,7 @@ void main() {
 		receiver->addTransactionToHistory(t);
 
 	}
-	
+
 	for (Transaction& t : System::allPendingRequests)
 	{
 		// Get sender and receiver from the transaction
@@ -410,9 +413,9 @@ void main() {
 	//System::loggedInUser = omar;
 
 	//User *u =System::getUser("omar");
-	
+
 	//Signup();
-	admin(ali);
+	Home();
 	//user_edit_password(System::allUsers["mado"]);
 	//user_messeges(System::allUsers["3oss"]);
 	//User_login();
@@ -422,12 +425,9 @@ void main() {
 	System::writePendingRequests();
 	System::writeAllTransactions();
 	System::writeUsersToFile();
-
 	//Home();
 	//user(omar);
 }
-
-
 
 
 void texturesandfonts()
@@ -484,27 +484,27 @@ void User_login()
 	user_login_set(h1);
 
 	std::string username, password; // Variables to store entered username and password
-	
-		sf::Text enteredUsername, enteredPassword;
-		enteredUsername.setFont(rokebFint);
-		enteredPassword.setFont(rokebFint);
-		enteredUsername.setFillColor(Color::Black);
-		enteredPassword.setFillColor(Color::Black);
-		enteredUsername.setCharacterSize(21);
-		enteredPassword.setCharacterSize(25);
-		enteredUsername.setPosition(690, 255);
-		enteredPassword.setPosition(690, 335);
-	
+
+	sf::Text enteredUsername, enteredPassword;
+	enteredUsername.setFont(rokebFint);
+	enteredPassword.setFont(rokebFint);
+	enteredUsername.setFillColor(Color::Black);
+	enteredPassword.setFillColor(Color::Black);
+	enteredUsername.setCharacterSize(21);
+	enteredPassword.setCharacterSize(25);
+	enteredUsername.setPosition(690, 255);
+	enteredPassword.setPosition(690, 335);
+
 	//wrong
-	
-		bool invalidboolen=false;
-		Text invalidinput;
-		invalidinput.setFont(britanicFont);
-		invalidinput.setFillColor(Color::Red);
-		invalidinput.setCharacterSize(25);
-		invalidinput.setPosition(630, 50);
-		invalidinput.setString("Wrong Username Or Password\n Please try again");
-	
+
+	bool invalidboolen = false;
+	Text invalidinput;
+	invalidinput.setFont(britanicFont);
+	invalidinput.setFillColor(Color::Red);
+	invalidinput.setCharacterSize(25);
+	invalidinput.setPosition(710, 10);
+	invalidinput.setString("Wrong Username Or \n     Password");
+
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = h1.half_background.getPosition();
 	float initialYPosition = 800; // Initial position below the window
@@ -698,7 +698,28 @@ void User_login()
 			}
 			if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
-				if (System::Login(username, password)) {
+				if (username.empty()||password.empty())
+				{
+					invalidboolen = true;
+					invalidinput.setPosition(710, 10);
+					invalidinput.setString("please fill all the data");
+					/*username = "";
+					password = "";
+					enteredPassword.setString(std::string(password.size(), '*'));
+					enteredUsername.setString(username);*/
+
+				}
+				else if (System::allUsers[username].suspended)
+				{
+					invalidboolen = true;
+					invalidinput.setString("your account is suspended");
+					username = "";
+					password = "";
+					enteredPassword.setString(std::string(password.size(), '*'));
+					enteredUsername.setString(username);
+					
+				}
+				else if (System::Login(username, password)) {
 
 
 					window.clear();
@@ -706,13 +727,14 @@ void User_login()
 					invalidboolen = false;
 					return user(System::allUsers[username]);
 				}
-				else  {
+				else {
 					invalidboolen = true;
 					username = "";
 					password = "";
 					enteredPassword.setString(std::string(password.size(), '*'));
 					enteredUsername.setString(username);
-					
+					invalidinput.setPosition(710, 10);
+					invalidinput.setString("Wrong Username Or \n     Password");
 				}
 			}
 		}
@@ -942,8 +964,8 @@ void Admin_login()
 	invalidinput.setFont(britanicFont);
 	invalidinput.setFillColor(Color::Red);
 	invalidinput.setCharacterSize(25);
-	invalidinput.setPosition(630, 50);
-	invalidinput.setString("Wrong Username Or Password\n Please try again");
+	invalidinput.setPosition(710, 10);
+	invalidinput.setString("Wrong Username Or \n     Password");
 
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = h1.half_background.getPosition();
@@ -1107,7 +1129,17 @@ void Admin_login()
 			}
 			if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
-				if (username == "admin" && password == "admin") {
+				if (username.empty() || password.empty())
+				{
+					invalidboolen = true;
+					invalidinput.setString("please fill all the data");
+					/*username = "";
+					password = "";
+					enteredPassword.setString(std::string(password.size(), '*'));
+					enteredUsername.setString(username);*/
+
+				}
+				else if (username == ali.get_username() && password == ali.get_password()) {
 
 
 					window.clear();
@@ -1120,7 +1152,9 @@ void Admin_login()
 					password = "";
 					enteredPassword.setString(std::string(password.size(), '*'));
 					enteredUsername.setString(username);
-					
+					invalidinput.setPosition(710, 10);
+					invalidinput.setString("Wrong Username Or \n     Password");
+
 				}
 			}
 		}
@@ -1312,6 +1346,14 @@ void Signup()
 
 	std::string username, password; // Variables to store entered username and password
 
+	bool invalidboolen = false;
+	Text invalidinput;
+	invalidinput.setFont(britanicFont);
+	invalidinput.setFillColor(Color::Red);
+	invalidinput.setCharacterSize(25);
+	invalidinput.setPosition(710, 10);
+	invalidinput.setString("Wrong Username Or Password\n Please try again");
+
 	sf::Text enteredUsername, enteredPassword;
 	enteredUsername.setFont(rokebFint);
 	enteredPassword.setFont(rokebFint);
@@ -1383,9 +1425,9 @@ void Signup()
 					wallet_icon.setScale(0.2, 0.2); // Return to original scale
 
 				if (add_user.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-					add_user.setScale(0.0385, 0.0385);
+					add_user.setScale(0.0355, 0.0355);
 				else
-					add_user.setScale(0.035, 0.035f); // Return to original scale
+					add_user.setScale(0.031, 0.031f); // Return to original scale
 
 
 				if (h1.text1.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
@@ -1497,7 +1539,7 @@ void Signup()
 				}
 
 				if (isPasswordInputActive) {
-					if (event.text.unicode == '\b' && !password.empty()) { // Backspace
+					if (!password.empty() && event.text.unicode == '\b') { // Backspace
 						password.pop_back();
 					}
 					else if (event.text.unicode < 128) {
@@ -1516,21 +1558,34 @@ void Signup()
 			{
 				//cout << "aiaoiosa\n";
 				window.clear();
-				return user(omar);
+				return Admin_login();
 			}
 			if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
-				if (System::allUsers.find(username) != System::allUsers.end() && password.empty()) {
-					cout << "Username already exist \n";
+				if (username.empty() || password.empty())
+				{
+					invalidboolen = true;
+					invalidinput.setString("please fill all the data");
+					/*username = "";
+					password = "";
+					enteredPassword.setString(std::string(password.size(), '*'));
+					enteredUsername.setString(username);*/
 
-
+				}
+				else if (System::allUsers.find(username) != System::allUsers.end()) {
+					invalidboolen = true;
+					invalidinput.setString("Username already exist");
+					username = "";
+					password = "";
+					enteredPassword.setString(std::string(password.size(), '*'));
+					enteredUsername.setString(username);
 				}
 				else
 				{
 
 					window.clear();
 					window.clear();
-					System::Register(username, password,0);
+					System::Register(username, password, 0);
 					return user(System::allUsers[username]);
 				}
 			}
@@ -1616,7 +1671,8 @@ void Signup()
 		window.draw(h1.text9);
 		window.draw(enteredUsername);
 		window.draw(enteredPassword);
-
+		if (invalidboolen)
+			window.draw(invalidinput);
 		// Display the window
 		window.display();
 
@@ -1631,7 +1687,7 @@ void signup_set(half& h1)
 	background.setScale(1.5, 1.5);
 
 	h1.frame_background.setTexture(background_frame_texture);
-	h1.frame_background.setScale(0.25, 1.4);
+	h1.frame_background.setScale(0.25, 1.2);
 	h1.frame_background.setPosition(520, 60);
 
 	wallet_icon.setTexture(wallet_icon_texture);
@@ -1639,8 +1695,8 @@ void signup_set(half& h1)
 	wallet_icon.setPosition(150, 150);
 
 	add_user.setTexture(add_user_texture);
-	add_user.setScale(0.035, 0.035);
-	add_user.setPosition(775, 140);
+	add_user.setScale(0.031, 0.031);
+	add_user.setPosition(785, 130);
 
 	h1.half_background.setTexture(darkbackground_texture);
 	h1.half_background.setPosition(-500, 0);
@@ -1648,15 +1704,15 @@ void signup_set(half& h1)
 
 	h1.button_1.setTexture(button_texture);
 	h1.button_1.setScale(0.1, 0.1);
-	h1.button_1.setPosition(720, 500);
+	h1.button_1.setPosition(720, 420);
 
 	h1.button_2.setTexture(button_texture);
 	h1.button_2.setScale(0.1, 0.1);
-	h1.button_2.setPosition(870, 700);
+	h1.button_2.setPosition(870, 620);
 
 	h1.button_3.setTexture(button_texture);
 	h1.button_3.setScale(0.1, 0.1);
-	h1.button_3.setPosition(580, 700);
+	h1.button_3.setPosition(580, 620);
 
 	h1.text1.setString("Welcome,to");
 	h1.text1.setCharacterSize(40);
@@ -1689,7 +1745,7 @@ void signup_set(half& h1)
 	h1.text6.setString("Sign Up");
 	h1.text6.setFont(berlinSansFont);
 	h1.text6.setCharacterSize(23);
-	h1.text6.setPosition(805, 505);
+	h1.text6.setPosition(800, 425);
 	h1.text6.setFillColor(sf::Color::White);
 
 	h1.text7.setString("Login as User");
@@ -1708,10 +1764,7 @@ void signup_set(half& h1)
 	h1.text9.setPosition(590, 655);
 	h1.text9.setFillColor(sf::Color::Black);
 
-	h1.text10.setString("Balance");
-	h1.text10.setFont(britanicFont);
-	h1.text10.setCharacterSize(20);
-	h1.text10.setPosition(580, 415);
+	
 
 	h1.textfiled_1.setTexture(text_field_texture);
 	h1.textfiled_1.setScale(0.15, 0.1);
@@ -1721,9 +1774,7 @@ void signup_set(half& h1)
 	h1.textfiled_2.setScale(0.15, 0.1);
 	h1.textfiled_2.setPosition(680, 330);
 
-	h1.textfiled_3.setTexture(text_field_texture);
-	h1.textfiled_3.setScale(0.15, 0.1);
-	h1.textfiled_3.setPosition(680, 410);
+	
 }
 void signup_draw(half& h1)
 {
@@ -1738,7 +1789,7 @@ void signup_draw(half& h1)
 	window.draw(h1.text3);
 	window.draw(h1.textfiled_1);
 	window.draw(h1.textfiled_2);
-	window.draw(h1.textfiled_3);
+	//window.draw(h1.textfiled_3);
 
 	window.draw(h1.text1);
 	window.draw(h1.text2);
@@ -1751,7 +1802,7 @@ void signup_draw(half& h1)
 	window.draw(h1.text7);
 	window.draw(h1.text8);
 	window.draw(h1.text9);
-	window.draw(h1.text10);
+//	window.draw(h1.text10);
 
 }
 
@@ -2012,16 +2063,15 @@ void home_draw(half& h1)
 	window.draw(background2);
 	window.draw(h1.half_background);
 
-	window.draw(wallet_icon);
+	//window.draw(wallet_icon);
 	window.draw(wallet_icon_2);
 	window.draw(home_icon);
-	window.draw(person);
 	window.draw(h1.button_1);
 	window.draw(h1.button_2);
 	window.draw(h1.button_3);
 
-	window.draw(h1.text1);
-	window.draw(h1.text2);
+	//window.draw(h1.text1);
+	//window.draw(h1.text2);
 	window.draw(h1.text3);
 	window.draw(h1.text4);
 	window.draw(h1.text5);
@@ -2034,6 +2084,7 @@ void home_draw(half& h1)
 void user(User& ali)
 
 {
+	view.setCenter(600, 400);
 	//texturesandfonts();
 	half h1;
 	user_set(h1, ali);
@@ -2436,8 +2487,8 @@ void user_send(User& ali)
 	enteredBalance.setFillColor(Color::Black);
 	enteredUsername.setCharacterSize(21);
 	enteredBalance.setCharacterSize(25);
-	enteredUsername.setPosition(310, 410);
-	enteredBalance.setPosition(860, 410);
+	enteredUsername.setPosition(310, 407);
+	enteredBalance.setPosition(860, 407);
 	bool isUsernameInputActive = false;
 	bool isBalanceInputActive = false;
 	//wrong
@@ -2447,7 +2498,7 @@ void user_send(User& ali)
 	invalidinput.setFont(britanicFont);
 	invalidinput.setFillColor(Color::Red);
 	invalidinput.setCharacterSize(25);
-	invalidinput.setPosition(460, 700);
+	invalidinput.setPosition(480, 700);
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = user_icon.getPosition();
 	float initialYPosition = 800; // Initial position below the window
@@ -2613,14 +2664,14 @@ void user_send(User& ali)
 					h1.button_1.setScale(0.11, 0.1);
 				if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
-
-					if(System::loggedInUser->suspended)
+					if (username.empty() || sendbalance.empty())
 					{
-						invalidboolen = true;
-						invalidinput.setString("Your account is suspended");
 						invalidinput.setFillColor(Color::Red);
+						invalidinput.setString("please fill all data");
+						invalidboolen = true;
+
 					}
-					if(System::loggedInUser->getUserName()==username)
+					else if (ali.UserName == username)
 					{
 						invalidboolen = true;
 						invalidinput.setString("You can not send money to yourself");
@@ -2635,7 +2686,7 @@ void user_send(User& ali)
 					else if (System::getUser(username)->suspended)
 					{
 						invalidboolen = true;
-						invalidinput.setString("This User is suspended");
+						invalidinput.setString("User \" "+username+" \" is suspended");
 						invalidinput.setFillColor(Color::Red);
 					}
 					else if (stod(sendbalance) == 0)
@@ -2644,7 +2695,7 @@ void user_send(User& ali)
 						invalidinput.setString("Balance can not be zero");
 						invalidinput.setFillColor(Color::Red);
 					}
-					else if(omar.balance-stod(sendbalance)<0)
+					else if (ali.balance - stod(sendbalance) < 0)
 					{
 
 						invalidboolen = true;
@@ -2652,7 +2703,7 @@ void user_send(User& ali)
 						invalidinput.setFillColor(Color::Red);
 					}
 					else {
-						omar.Send(username, stod(sendbalance));
+						ali.Send(username, stod(sendbalance));
 
 						invalidboolen = true;
 						invalidinput.setString("Money sent Successfully");
@@ -2661,6 +2712,10 @@ void user_send(User& ali)
 						enteredUsername.setString(username);
 						sendbalance = "";
 						enteredBalance.setString(sendbalance);
+
+						stringstream stream;
+						stream << fixed << setprecision(2) << ali.balance;
+						h1.text10.setString(stream.str() + " $");
 					}
 				}
 
@@ -2880,8 +2935,8 @@ void user_request(User& ali)
 	enteredBalance.setFillColor(Color::Black);
 	enteredUsername.setCharacterSize(21);
 	enteredBalance.setCharacterSize(25);
-	enteredUsername.setPosition(310, 410);
-	enteredBalance.setPosition(860, 410);
+	enteredUsername.setPosition(310, 406);
+	enteredBalance.setPosition(860, 406);
 	bool isUsernameInputActive = false;
 	bool isBalanceInputActive = false;
 	//wrong
@@ -2891,7 +2946,7 @@ void user_request(User& ali)
 	invalidinput.setFont(britanicFont);
 	invalidinput.setFillColor(Color::Red);
 	invalidinput.setCharacterSize(25);
-	invalidinput.setPosition(460, 700);
+	invalidinput.setPosition(480, 700);
 
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = user_icon.getPosition();
@@ -3063,13 +3118,15 @@ void user_request(User& ali)
 				if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
 
-					if (System::loggedInUser->suspended)
+					if (username.empty() || sendbalance.empty() )
 					{
-						invalidboolen = true;
-						invalidinput.setString("Your account is suspended");
 						invalidinput.setFillColor(Color::Red);
+						invalidinput.setString("please fill all data");
+						invalidboolen = true;
+						
 					}
-					if (System::loggedInUser->getUserName() == username)
+					
+					else if (ali.UserName == username)
 					{
 						invalidboolen = true;
 						invalidinput.setString("Request money to yourself");
@@ -3084,7 +3141,7 @@ void user_request(User& ali)
 					else if (System::getUser(username)->suspended)
 					{
 						invalidboolen = true;
-						invalidinput.setString("This User is suspended");
+						invalidinput.setString("User \" "+username + " \" is suspended");
 						invalidinput.setFillColor(Color::Red);
 					}
 					else if (stod(sendbalance) == 0)
@@ -3094,7 +3151,7 @@ void user_request(User& ali)
 						invalidinput.setFillColor(Color::Red);
 					}
 					else {
-						omar.RequestMoney(username, stod(sendbalance));
+						ali.RequestMoney(username, stod(sendbalance));
 
 						invalidboolen = true;
 						invalidinput.setString("Request Successfully");
@@ -3305,18 +3362,18 @@ void user_request_draw(half& h1)
 void user_messeges(User& ali)
 {
 	halfvec h1;
-	h1.textfiled_arr_1.resize(ali.pendingRequests.size()+1);
-	h1.textfiled_arr_2.resize(ali.pendingRequests.size()+1);
-	h1.textfiled_arr_3.resize(ali.pendingRequests.size()+1);
-	h1.frame_background_arr.resize(ali.pendingRequests.size()+1);
-	h1.button_1_arr.resize(ali.pendingRequests.size()+1);
-	h1.button_2_arr.resize(ali.pendingRequests.size()+1);
-	h1.text_arr_1.resize(ali.pendingRequests.size()+1);
-	h1.text_arr_2.resize(ali.pendingRequests.size()+1);
-	h1.text_arr_3.resize(ali.pendingRequests.size()+1);
-	h1.text_arr_4.resize(ali.pendingRequests.size()+1);
-	h1.text_arr_5.resize(ali.pendingRequests.size()+1);
-	h1.text_arr_6.resize(ali.pendingRequests.size()+1);
+	h1.textfiled_arr_1.resize(ali.pendingRequests.size() + 1);
+	h1.textfiled_arr_2.resize(ali.pendingRequests.size() + 1);
+	h1.textfiled_arr_3.resize(ali.pendingRequests.size() + 1);
+	h1.frame_background_arr.resize(ali.pendingRequests.size() + 1);
+	h1.button_1_arr.resize(ali.pendingRequests.size() + 1);
+	h1.button_2_arr.resize(ali.pendingRequests.size() + 1);
+	h1.text_arr_1.resize(ali.pendingRequests.size() + 1);
+	h1.text_arr_2.resize(ali.pendingRequests.size() + 1);
+	h1.text_arr_3.resize(ali.pendingRequests.size() + 1);
+	h1.text_arr_4.resize(ali.pendingRequests.size() + 1);
+	h1.text_arr_5.resize(ali.pendingRequests.size() + 1);
+	h1.text_arr_6.resize(ali.pendingRequests.size() + 1);
 
 	//texturesandfonts();
 //size_of_arr = ali.pendingRequests.size();
@@ -3429,50 +3486,50 @@ void user_messeges(User& ali)
 
 				for (int i = 0; i < ali.pendingRequests.size(); i++)
 				{
-					
-					
-					
-						if (h1.textfiled_arr_1[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-							h1.textfiled_arr_1[i].setScale(0.1, 0.088); // Scale up
-						else
-							h1.textfiled_arr_1[i].setScale(0.1, 0.08);
 
 
-						if (h1.textfiled_arr_2[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-							h1.textfiled_arr_2[i].setScale(0.08, 0.088); // Scale up
-						else
-							h1.textfiled_arr_2[i].setScale(0.08, 0.08);
 
-						if (h1.text_arr_1[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-							h1.text_arr_1[i].setCharacterSize(22);// Scale up
-						else
-							h1.text_arr_1[i].setCharacterSize(20);
+					if (h1.textfiled_arr_1[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+						h1.textfiled_arr_1[i].setScale(0.1, 0.088); // Scale up
+					else
+						h1.textfiled_arr_1[i].setScale(0.1, 0.08);
 
-						if (h1.text_arr_2[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-							h1.text_arr_2[i].setCharacterSize(22);// Scale up
-						else
-							h1.text_arr_2[i].setCharacterSize(20);
 
-						if (h1.frame_background_arr[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-							h1.frame_background_arr[i].setScale(0.47, 0.38);// Scale up
-						else
-							h1.frame_background_arr[i].setScale(0.47, 0.35);
+					if (h1.textfiled_arr_2[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+						h1.textfiled_arr_2[i].setScale(0.08, 0.088); // Scale up
+					else
+						h1.textfiled_arr_2[i].setScale(0.08, 0.08);
 
-						if (h1.button_1_arr[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-							h1.button_1_arr[i].setScale(0.1155, 0.1155);
-						else
-							h1.button_1_arr[i].setScale(0.105, 0.105);
+					if (h1.text_arr_1[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+						h1.text_arr_1[i].setCharacterSize(22);// Scale up
+					else
+						h1.text_arr_1[i].setCharacterSize(20);
 
-						if (h1.button_2_arr[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-							h1.button_2_arr[i].setScale(0.088, 0.088);
-						else
-							h1.button_2_arr[i].setScale(0.08, 0.08);
+					if (h1.text_arr_2[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+						h1.text_arr_2[i].setCharacterSize(22);// Scale up
+					else
+						h1.text_arr_2[i].setCharacterSize(20);
 
-						if (h1.text_arr_3[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-							h1.text_arr_3[i].setCharacterSize(26);// Scale up
-						else
-							h1.text_arr_3[i].setCharacterSize(24);
-					
+					if (h1.frame_background_arr[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+						h1.frame_background_arr[i].setScale(0.47, 0.38);// Scale up
+					else
+						h1.frame_background_arr[i].setScale(0.47, 0.35);
+
+					if (h1.button_1_arr[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+						h1.button_1_arr[i].setScale(0.1155, 0.1155);
+					else
+						h1.button_1_arr[i].setScale(0.105, 0.105);
+
+					if (h1.button_2_arr[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+						h1.button_2_arr[i].setScale(0.088, 0.088);
+					else
+						h1.button_2_arr[i].setScale(0.08, 0.08);
+
+					if (h1.text_arr_3[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+						h1.text_arr_3[i].setCharacterSize(26);// Scale up
+					else
+						h1.text_arr_3[i].setCharacterSize(24);
+
 					if (h1.button_1_arr[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 					{
 						auto it = ali.pendingRequests.rbegin();
@@ -3496,7 +3553,7 @@ void user_messeges(User& ali)
 						advance(ve8, i);
 						advance(ve, i);
 						advance(it, i);
-					
+
 						// }
 
 						//auto fwd_it = std::next(ve).base();
@@ -3565,7 +3622,7 @@ void user_messeges(User& ali)
 							stream.str("");
 							stream << fixed << setprecision(2) << ali.balance;
 							h1.text10.setString(stream.str() + " $");
-							
+
 						}
 					}
 					if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
@@ -3575,7 +3632,7 @@ void user_messeges(User& ali)
 					}
 					if (h1.button_2_arr[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 					{
-						
+
 						auto it = ali.pendingRequests.rbegin();
 						auto ve = h1.button_1_arr.begin();
 						auto ve2 = h1.button_2_arr.begin();
@@ -3623,14 +3680,13 @@ void user_messeges(User& ali)
 							h1.text_arr_3.erase(ve8);
 							h1.frame_background_arr.erase(ve6);
 						}
-						
+
 						ali.Reject(*it);
 						invalidboolen = true;
 						invalidinput.setString("Reject successfully");
 						invalidinput.setFillColor(Color::Red);
-						
 
-						h1.text10.setString(stream.str() + " $");
+						
 						if (h1.text_arr_4[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 							h1.text_arr_4[i].setCharacterSize(24);// Scale up
 						else
@@ -3670,8 +3726,9 @@ void user_messeges(User& ali)
 				window.clear();
 				return user(ali);
 			}
+		}
 			window.clear();
-
+		
 			user_messeges_draw(h1);
 
 			//Calculate the new position of the sprites based on elapsed time for x-axis transition
@@ -3812,7 +3869,7 @@ void user_messeges(User& ali)
 				break;*/
 
 
-		}
+		
 	}
 }
 void user_messeges_set(halfvec& h1, User& ali)
@@ -3940,7 +3997,7 @@ void user_messeges_set(halfvec& h1, User& ali)
 
 	if (ali.pendingRequests.empty())
 	{
-		h1.text8.setString("There is no Messages\n       to be displayed");
+		h1.text8.setString("There is no Messages to\n       be displayed");
 		h1.text8.setFont(britanicFont);
 		h1.text8.setCharacterSize(35);
 		h1.text8.setPosition(400, 450);
@@ -3982,6 +4039,7 @@ void user_messeges_draw(halfvec& h1)
 void user_transactions(User& ali)
 
 {
+	view.setCenter(600, 400);
 	half h1;
 	h1.textfiled_arr_1 = new Sprite[ali.History.size()];
 	h1.textfiled_arr_2 = new Sprite[ali.History.size()];
@@ -4153,6 +4211,8 @@ void user_transactions(User& ali)
 				if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
 					window.clear();
+					view.setCenter(600, 400);
+					window.setView(view);
 					return user(ali);
 				}
 				if (event.type == sf::Event::MouseWheelScrolled && event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
@@ -4420,11 +4480,11 @@ void user_transactions_set(half& h1, User& ali)
 		h1.text_arr_8[i].setCharacterSize(20);
 		h1.text_arr_8[i].setPosition(865, 446 + i * 160);
 		h1.text_arr_8[i].setFillColor(sf::Color::Black);
-		if (it->sender == omar.UserName)
+		if (it->sender == ali.UserName)
 		{
 			h1.text_arr_3[i].setFillColor(sf::Color::Blue);
 		}
-		else if (it->reciever == omar.UserName)
+		else if (it->reciever == ali.UserName)
 		{
 			h1.text_arr_6[i].setFillColor(sf::Color::Blue);
 		}
@@ -4703,7 +4763,6 @@ void user_edit_profile(User& ali)
 		window.draw(h1.text1);
 		window.draw(h1.text2);
 		window.draw(user_icon);
-		window.draw(person);
 		// Display the window
 		window.display();
 
@@ -4831,20 +4890,20 @@ void user_edit_username(User& ali)
 	half h1;
 	user_edit_username_set(h1, ali);
 	/////////////////////////////
-	std::string  newUsername; // Variables to store entered username and password
+	std::string  newUsername,temp=ali.UserName; // Variables to store entered username and password
 
 	sf::Text  enteredNewUsername;
 	enteredNewUsername.setFont(rokebFint);
 	enteredNewUsername.setFillColor(Color::Black);
 	enteredNewUsername.setCharacterSize(25);
-	enteredNewUsername.setPosition(585, 470);
+	enteredNewUsername.setPosition(587, 462);
 	bool isUsernameInputActive = false;
 	bool invalidboolen = false;
 	Text invalidinput;
 	invalidinput.setFont(britanicFont);
 	invalidinput.setFillColor(Color::Red);
 	invalidinput.setCharacterSize(25);
-	invalidinput.setPosition(400, 700);
+	invalidinput.setPosition(480, 700);
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = user_icon.getPosition();
 	float initialYPosition = 800; // Initial position below the window
@@ -4890,7 +4949,7 @@ void user_edit_username(User& ali)
 				}
 
 				// Check if mouse clicked on password input field
-				
+
 
 			}
 			if (event.type == sf::Event::TextEntered) {
@@ -4904,7 +4963,7 @@ void user_edit_username(User& ali)
 					enteredNewUsername.setString(newUsername);
 				}
 
-				
+
 			}
 			// Check if mouse is over specific sprites and adjust scale accordingly
 			if (true) {
@@ -4976,24 +5035,30 @@ void user_edit_username(User& ali)
 				if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
 
-
-					 if (System::search_user(newUsername))
+					if (newUsername==ali.UserName)
 					{
 						invalidboolen = true;
-						invalidinput.setString("New Username already exist");
+						invalidinput.setString("the name you entered \n is your current name");
+						invalidinput.setFillColor(Color::Red);
+
+					}
+					else if (System::search_user(newUsername))
+					{
+						invalidboolen = true;
+						invalidinput.setString("New Username already\n      exist");
 						invalidinput.setFillColor(Color::Red);
 
 					}
 					else {
-						ali.editUsername(newUsername);
-
+						User t = System::allUsers[temp];
+						t.editUsername(newUsername);
+						temp = newUsername;
 						invalidboolen = true;
 						invalidinput.setString("Edited Successfully");
 						invalidinput.setFillColor(Color::Green);
-						/*newUsername = "";
-						enteredNewUsername.setString(newUsername);*/
-						return user(System::allUsers[newUsername]);
-						
+						newUsername = "";
+						enteredNewUsername.setString(newUsername);
+						//return user(System::allUsers[newUsername]);
 					}
 				}
 
@@ -5002,7 +5067,7 @@ void user_edit_username(User& ali)
 			if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
 				window.clear();
-				return user_edit_profile(ali);
+				return user_edit_profile(System::allUsers[temp]);
 			}
 
 		}
@@ -5195,8 +5260,8 @@ void user_edit_password(User& ali)
 	enteredNewpassword.setFont(rokebFint);
 	enteredPassword.setFillColor(Color::Black);
 	enteredNewpassword.setFillColor(Color::Black);
-	enteredPassword.setCharacterSize(21);
-	enteredNewpassword.setCharacterSize(25);
+	enteredPassword.setCharacterSize(23);
+	enteredNewpassword.setCharacterSize(23);
 	enteredPassword.setPosition(310, 470);
 	enteredNewpassword.setPosition(860, 470);
 	bool isUsernameInputActive = false;
@@ -5208,7 +5273,7 @@ void user_edit_password(User& ali)
 	invalidinput.setFont(britanicFont);
 	invalidinput.setFillColor(Color::Red);
 	invalidinput.setCharacterSize(25);
-	invalidinput.setPosition(550, 700);
+	invalidinput.setPosition(480, 700);
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = user_icon.getPosition();
 	float initialYPosition = 800; // Initial position below the window
@@ -5269,7 +5334,7 @@ void user_edit_password(User& ali)
 					else if (event.text.unicode < 128) {
 						password += static_cast<char>(event.text.unicode);
 					}
-					enteredPassword.setString(password);
+					enteredPassword.setString(std::string(password.size(), '*'));
 				}
 
 				if (isPasswordInputActive) {
@@ -5279,7 +5344,7 @@ void user_edit_password(User& ali)
 					else if (event.text.unicode < 128) {
 						newPassword += static_cast<char>(event.text.unicode);
 					}
-					enteredNewpassword.setString(newPassword);
+					enteredNewpassword.setString(std::string(newPassword.size(), '*'));
 				}
 			}
 			// Check if mouse is over specific sprites and adjust scale accordingly
@@ -5360,8 +5425,13 @@ void user_edit_password(User& ali)
 				if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
 
-
-					if (newPassword==password)
+				 if (newPassword.empty() || password.empty())
+					{
+					 invalidboolen = true;
+					 invalidinput.setString("please fill all the data");
+					 invalidinput.setFillColor(Color::Red);
+					}
+					else if (newPassword == password)
 					{
 						ali.editPassword(newPassword);
 
@@ -5370,13 +5440,13 @@ void user_edit_password(User& ali)
 						invalidinput.setFillColor(Color::Green);
 
 						password = "";
-						enteredPassword.setString(password);
+						enteredPassword.setString(std::string(password.size(), '*'));
 						newPassword = "";
-						enteredNewpassword.setString(newPassword);
+						enteredNewpassword.setString(std::string(newPassword.size(), '*'));
 					}
 					else {
 						invalidboolen = true;
-						invalidinput.setString("Make sure it is the same password");
+						invalidinput.setString("Make sure it is\nthe same password");
 						invalidinput.setFillColor(Color::Red);
 					}
 				}
@@ -5576,6 +5646,12 @@ void user_edit_password_draw(half& h1)
 void admin(Admin& ali)
 
 {
+	
+	sf::Vector2f initialViewCenter(600, 400);
+
+	// Set the initial view position
+	view.setCenter(initialViewCenter);
+
 	//texturesandfonts();
 	half h1;
 	Admin_set(h1, ali);
@@ -5608,6 +5684,7 @@ void admin(Admin& ali)
 	// Event loop
 	while (window.isOpen())
 	{
+		view.setCenter(600, 400);
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -5791,17 +5868,17 @@ void admin(Admin& ali)
 			h1.text1.setPosition(newXPosition + 265, 80); // Adjust position of text1
 			h1.text2.setPosition(newXPosition + 290, 130); // Adjust position of text2
 			admin_icon.setPosition(newXPosition + 150, 80); // Adjust position of wallet_icon
-			profile_edit.setPosition(950 - newXPosition, 80);
-			h1.text3.setPosition(950 - newXPosition, 180);
+			//profile_edit.setPosition(950 - newXPosition, 80);
+			//h1.text3.setPosition(950 - newXPosition, 180);
 		}
 		else
 		{
 			// Animation for x-axis transition is complete, set the final position of the sprites
 			h1.text1.setPosition(finalXPosition + 265, 80); // Adjust position of text1
 			h1.text2.setPosition(finalXPosition + 290, 130); // Adjust position of text2
-			wallet_icon.setPosition(finalXPosition + 150, 80); // Adjust position of wallet_icon
-			profile_edit.setPosition(950, 80);
-			h1.text3.setPosition(950, 180);
+			//wallet_icon.setPosition(finalXPosition + 150, 80); // Adjust position of wallet_icon
+			//profile_edit.setPosition(950, 80);
+			//h1.text3.setPosition(950, 180);
 		}
 
 
@@ -5814,9 +5891,6 @@ void admin(Admin& ali)
 		// Display the window
 		window.display();
 
-		// Check if both animations are complete
-		/*if (clock.getElapsedTime().asSeconds() >= animationTimeX && clock.getElapsedTime().asSeconds() >= animationTimeY)
-			break;*/
 	}
 }
 void Admin_set(half& h1, Admin& ali)
@@ -5878,7 +5952,7 @@ void Admin_set(half& h1, Admin& ali)
 	h1.text1.setPosition(265, 80);
 	h1.text1.setFont(britanicFont);
 
-	h1.text2.setString(ali.get_username());
+	h1.text2.setString("Ali");
 	h1.text2.setFont(britanicFont);
 	h1.text2.setCharacterSize(40);
 	h1.text2.setPosition(245, 130);
@@ -6153,7 +6227,7 @@ void admin_edit_user(Admin& ali)
 		window.draw(h1.text1);
 		window.draw(h1.text2);
 		window.draw(admin_icon);
-		window.draw(person);
+		
 		// Display the window
 		window.display();
 
@@ -6274,7 +6348,7 @@ void admin_edit_username_of_user(Admin& ali)
 	enteredUsername.setFillColor(Color::Black);
 	enteredNewUsername.setFillColor(Color::Black);
 	enteredUsername.setCharacterSize(21);
-	enteredNewUsername.setCharacterSize(25);
+	enteredNewUsername.setCharacterSize(21);
 	enteredUsername.setPosition(310, 470);
 	enteredNewUsername.setPosition(860, 470);
 	bool isUsernameInputActive = false;
@@ -6286,8 +6360,8 @@ void admin_edit_username_of_user(Admin& ali)
 	invalidinput.setFont(britanicFont);
 	invalidinput.setFillColor(Color::Red);
 	invalidinput.setCharacterSize(25);
-	invalidinput.setPosition(550, 700);
-	
+	invalidinput.setPosition(480, 700);
+
 	// Define the speed of the animation for x-axis transition
 	float animationSpeedX = 800; // pixels per second
 
@@ -6417,9 +6491,14 @@ void admin_edit_username_of_user(Admin& ali)
 					h1.button_1.setScale(0.11, 0.1);
 				if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
-					
-					
-					if (!System::search_user(username))
+
+					 if (username.empty()||newUsername.empty())
+					 {
+							invalidboolen = true;
+							invalidinput.setString("please fill all the data");
+							invalidinput.setFillColor(Color::Red);
+					 }
+					else if (!System::search_user(username))
 					{
 						invalidboolen = true;
 						invalidinput.setString("Username does not exist");
@@ -6432,10 +6511,11 @@ void admin_edit_username_of_user(Admin& ali)
 						invalidinput.setFillColor(Color::Red);
 
 					}
-					else  {
+					else {
 						ali.edit_username(username, newUsername);
 
 						invalidboolen = true;
+						invalidinput.setPosition(500, 700);
 						invalidinput.setString("Edited Successfully");
 						invalidinput.setFillColor(Color::Green);
 						username = "";
@@ -6446,11 +6526,7 @@ void admin_edit_username_of_user(Admin& ali)
 				}
 
 			}
-			if (logout.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-			{
-				window.clear();
-				return Home();
-			}
+			
 			if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
 				window.clear();
@@ -6494,8 +6570,7 @@ void admin_edit_username_of_user(Admin& ali)
 		window.draw(h1.text1);
 		window.draw(h1.text2);
 		window.draw(admin_icon);
-		window.draw(person);
-		if(invalidboolen)
+		if (invalidboolen)
 		{
 			window.draw(invalidinput);
 		}
@@ -6583,10 +6658,10 @@ void admin_edit_username_of_user_draw(half& h1)
 	window.draw(background);
 	window.draw(h1.half_background);
 	window.draw(h1.frame_background);
-	window.draw(user_icon);
+	
 	window.draw(edit_user);
 
-	window.draw(wallet_icon);
+	
 	window.draw(back);
 
 	window.draw(h1.textfiled_2);
@@ -6627,7 +6702,7 @@ void admin_edit_password_of_user(Admin& ali)
 	enteredUsername.setFillColor(Color::Black);
 	enteredNewpassword.setFillColor(Color::Black);
 	enteredUsername.setCharacterSize(21);
-	enteredNewpassword.setCharacterSize(25);
+	enteredNewpassword.setCharacterSize(21);
 	enteredUsername.setPosition(310, 470);
 	enteredNewpassword.setPosition(860, 470);
 	bool isUsernameInputActive = false;
@@ -6639,7 +6714,7 @@ void admin_edit_password_of_user(Admin& ali)
 	invalidinput.setFont(britanicFont);
 	invalidinput.setFillColor(Color::Red);
 	invalidinput.setCharacterSize(25);
-	invalidinput.setPosition(550, 700);
+	invalidinput.setPosition(480, 700);
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = admin_icon.getPosition();
 	float initialYPosition = 800; // Initial position below the window
@@ -6708,7 +6783,7 @@ void admin_edit_password_of_user(Admin& ali)
 					else if (event.text.unicode < 128) {
 						newPassword += static_cast<char>(event.text.unicode);
 					}
-					enteredNewpassword.setString(newPassword);
+					enteredNewpassword.setString(std::string(newPassword.size(), '*'));
 				}
 			}
 			// Check if mouse is over specific sprites and adjust scale accordingly
@@ -6774,23 +6849,29 @@ void admin_edit_password_of_user(Admin& ali)
 				if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
 
-
-					if (!System::search_user(username))
+					if (username.empty() || newPassword.empty())
+					{
+						invalidboolen = true;
+						invalidinput.setString("please fill all the data");
+						invalidinput.setFillColor(Color::Red);
+					}
+					else if (!System::search_user(username))
 					{
 						invalidboolen = true;
 						invalidinput.setString("Username does not exist");
 						invalidinput.setFillColor(Color::Red);
 					}
 					else {
-						ali.edit_password(username,newPassword);
+						ali.edit_password(username, newPassword);
 
 						invalidboolen = true;
+						invalidinput.setPosition(500, 700);
 						invalidinput.setString("Edited Successfully");
 						invalidinput.setFillColor(Color::Green);
 						username = "";
 						enteredUsername.setString(username);
 						newPassword = "";
-						enteredNewpassword.setString(newPassword);
+						enteredNewpassword.setString(std::string(newPassword.size(), '*'));
 					}
 				}
 
@@ -6844,7 +6925,6 @@ void admin_edit_password_of_user(Admin& ali)
 		window.draw(h1.text1);
 		window.draw(h1.text2);
 		window.draw(admin_icon);
-		window.draw(person);
 		if (invalidboolen)
 		{
 			window.draw(invalidinput);
@@ -6933,10 +7013,9 @@ void admin_edit_password_of_user_draw(half& h1)
 	window.draw(background);
 	window.draw(h1.half_background);
 	window.draw(h1.frame_background);
-	window.draw(user_icon);
+	
 	window.draw(edit_user);
 
-	window.draw(wallet_icon);
 	window.draw(back);
 
 	window.draw(h1.textfiled_2);
@@ -6991,7 +7070,7 @@ void admin_edit_balance_of_user(Admin& ali)
 	invalidinput.setFont(britanicFont);
 	invalidinput.setFillColor(Color::Red);
 	invalidinput.setCharacterSize(25);
-	invalidinput.setPosition(550, 700);
+	invalidinput.setPosition(480, 700);
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = admin_icon.getPosition();
 	float initialYPosition = 800; // Initial position below the window
@@ -7134,23 +7213,30 @@ void admin_edit_balance_of_user(Admin& ali)
 				if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
 
-
-					if (!System::search_user(username))
+					if (balance.empty()||username.empty())
+					{
+						invalidboolen = true;
+						invalidinput.setString("please fill all the data");
+						invalidinput.setFillColor(Color::Red);
+					}
+					else if (!System::search_user(username))
 					{
 						invalidboolen = true;
 						invalidinput.setString("Username does not exist");
 						invalidinput.setFillColor(Color::Red);
 					}
-					else if (stod(balance)<0)
+					else if (stod(balance) < 0)
 					{
 						invalidboolen = true;
-						invalidinput.setString("Balance can not be negative");
+						invalidinput.setString("please enter a valid balance");
 						invalidinput.setFillColor(Color::Red);
 					}
+					
 					else {
-						ali.edit_balance(username,stod(balance));
+						ali.edit_balance(username, stod(balance));
 
 						invalidboolen = true;
+						invalidinput.setPosition(500, 700);
 						invalidinput.setString("Edited Successfully");
 						invalidinput.setFillColor(Color::Green);
 						username = "";
@@ -7189,7 +7275,6 @@ void admin_edit_balance_of_user(Admin& ali)
 			h1.text1.setPosition(newXPosition + 165, 80); // Adjust position of text1
 			h1.text2.setPosition(newXPosition + 165, 130); // Adjust position of text2
 			admin_icon.setPosition(newXPosition + 50, 80); // Adjust position of wallet_icon
-			profile_edit.setPosition(950 - newXPosition, 80);
 			//h1.text3.setPosition(950 - newXPosition, 180);
 		}
 		else
@@ -7208,7 +7293,7 @@ void admin_edit_balance_of_user(Admin& ali)
 		window.draw(h1.text1);
 		window.draw(h1.text2);
 		window.draw(admin_icon);
-		window.draw(person);
+		
 		if (invalidboolen)
 		{
 			window.draw(invalidinput);
@@ -7295,10 +7380,8 @@ void admin_edit_balance_of_user_draw(half& h1)
 	window.draw(background);
 	window.draw(h1.half_background);
 	window.draw(h1.frame_background);
-	window.draw(user_icon);
 	window.draw(edit_user);
 
-	window.draw(wallet_icon);
 	window.draw(back);
 
 	window.draw(h1.textfiled_2);
@@ -7462,9 +7545,19 @@ void admin_suspend_user(Admin& ali)
 
 				if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
 					h1.button_1.setScale(0.111, 0.11); // Scale up
-				if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+				else
+					h1.button_1.setScale(0.11, 0.1);
+
+				if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 					if (!System::search_user(username)) {
 						exist.setString("Username does not exist");
+						exist.setFillColor(Color::Red);
+						notExist = true;
+					}
+					else if (System::getUser(username)->suspended)
+					{
+						exist.setPosition(450, 700);
+						exist.setString("This User is already Suspended");
 						exist.setFillColor(Color::Red);
 						notExist = true;
 					}
@@ -7478,8 +7571,7 @@ void admin_suspend_user(Admin& ali)
 
 					}
 				}
-				else
-					h1.button_1.setScale(0.11, 0.1);
+				
 
 			}
 			if (logout.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
@@ -7530,8 +7622,7 @@ void admin_suspend_user(Admin& ali)
 		window.draw(h1.text1);
 		window.draw(h1.text2);
 		window.draw(admin_icon);
-		window.draw(person);
-		if(notExist)
+		if (notExist)
 		{
 			window.draw(exist);
 		}
@@ -7610,10 +7701,8 @@ void admin_suspend_user_draw(half& h1)
 	window.draw(background);
 	window.draw(h1.half_background);
 	window.draw(h1.frame_background);
-	window.draw(user_icon);
 	window.draw(suspend_user);
 
-	window.draw(wallet_icon);
 	window.draw(back);
 
 	window.draw(h1.textfiled_2);
@@ -7763,8 +7852,9 @@ void admin_reactivate_user(Admin& ali)
 						exist.setFillColor(Color::Red);
 						notExist = true;
 					}
-					else if(!System::getUser(username)->suspended)
+					else if (!System::getUser(username)->suspended)
 					{
+						exist.setPosition(450, 700);
 						exist.setString("This User is not Suspended");
 						exist.setFillColor(Color::Red);
 						notExist = true;
@@ -7846,7 +7936,6 @@ void admin_reactivate_user(Admin& ali)
 		window.draw(h1.text1);
 		window.draw(h1.text2);
 		window.draw(admin_icon);
-		window.draw(person);
 		if (notExist)
 		{
 			window.draw(exist);
@@ -7926,10 +8015,8 @@ void admin_reactivate_user_draw(half& h1)
 	window.draw(background);
 	window.draw(h1.half_background);
 	window.draw(h1.frame_background);
-	window.draw(user_icon);
 	window.draw(reactivate_user);
 
-	window.draw(wallet_icon);
 	window.draw(back);
 
 	window.draw(h1.textfiled_2);
@@ -8015,7 +8102,7 @@ void admin_remove_user(Admin& ali)
 				// Check if mouse clicked on username input field
 				if (h1.textfiled_2.getGlobalBounds().contains(Vector2f(mousePosition))) {
 					isUsernameInputActive = true;
-					
+
 				}
 
 			}
@@ -8157,8 +8244,7 @@ void admin_remove_user(Admin& ali)
 		window.draw(h1.text1);
 		window.draw(h1.text2);
 		window.draw(admin_icon);
-		window.draw(person);
-		if(notExist)
+		if (notExist)
 		{
 			window.draw(exist);
 		}
@@ -8237,10 +8323,8 @@ void admin_remove_user_draw(half& h1)
 	window.draw(background);
 	window.draw(h1.half_background);
 	window.draw(h1.frame_background);
-	window.draw(user_icon);
 	window.draw(remove_user);
 
-	window.draw(wallet_icon);
 	window.draw(back);
 
 	window.draw(h1.textfiled_2);
@@ -8283,26 +8367,26 @@ void admin_add_user(Admin& ali)
 	enteredUsername.setFillColor(Color::Black);
 	enteredPassword.setFillColor(Color::Black);
 	enteredBalance.setFillColor(Color::Black);
-	enteredUsername.setCharacterSize(18);
-	enteredPassword.setCharacterSize(18);
-	enteredBalance.setCharacterSize(18);
-	enteredUsername.setPosition(162, 463);
-	enteredPassword.setPosition(548, 463);
-	enteredBalance.setPosition(908, 463);
+	enteredUsername.setCharacterSize(21);
+	enteredPassword.setCharacterSize(23);
+	enteredBalance.setCharacterSize(21);
+	enteredUsername.setPosition(162, 468);
+	enteredPassword.setPosition(548, 468);
+	enteredBalance.setPosition(908, 468);
 	//////////////////////////////////////
-	Text alreadyExist,missingText;
+	Text alreadyExist, missingText;
 	alreadyExist.setFont(britanicFont);
 	alreadyExist.setFillColor(Color::Red);
 	alreadyExist.setCharacterSize(22);
-	alreadyExist.setPosition(535,650);
-	
-	bool exist=false;
+	alreadyExist.setPosition(480, 670);
+
+	bool exist = false;
 	bool missing = false;
 	missingText.setFont(britanicFont);
-		missingText.setFillColor(Color::Red);
-		
-		missingText.setCharacterSize(30);
-		missingText.setPosition(530,650);
+	missingText.setFillColor(Color::Red);
+
+	missingText.setCharacterSize(22);
+	missingText.setPosition(480, 670);
 	// Get the initial position of the wallet_icon, half_background, and other elements
 	sf::Vector2f initialPosition = admin_icon.getPosition();
 	float initialYPosition = 800; // Initial position below the window
@@ -8360,216 +8444,223 @@ void admin_add_user(Admin& ali)
 
 				}
 			}
-				if (event.type == sf::Event::TextEntered) {
-					if (isUsernameInputActive) {
-						if (event.text.unicode == '\b' && !username.empty()) { // Backspacek
-							username.pop_back();
-						}
-						else if (event.text.unicode < 128) {
-							username += static_cast<char>(event.text.unicode);
-						}
-						enteredUsername.setString(username);
+			if (event.type == sf::Event::TextEntered) {
+				if (isUsernameInputActive) {
+					if (event.text.unicode == '\b' && !username.empty()) { // Backspacek
+						username.pop_back();
 					}
+					else if (event.text.unicode < 128) {
+						username += static_cast<char>(event.text.unicode);
+					}
+					enteredUsername.setString(username);
+				}
 
-					if (isPasswordInputActive) {
-						if (event.text.unicode == '\b' && !password.empty()) { // Backspace
-							password.pop_back();
-						}
-						else if (event.text.unicode < 128) {
-							password += static_cast<char>(event.text.unicode);
-						}
-						enteredPassword.setString(std::string(password.size(), '*'));
+				if (isPasswordInputActive) {
+					if (event.text.unicode == '\b' && !password.empty()) { // Backspace
+						password.pop_back();
 					}
-					if (isBalanceInputActive) {
-						if (event.text.unicode == '\b' && !balance.empty()) { // Backspace
-							balance.pop_back();
+					else if (event.text.unicode < 128) {
+						password += static_cast<char>(event.text.unicode);
+					}
+					enteredPassword.setString(std::string(password.size(), '*'));
+				}
+				if (isBalanceInputActive) {
+					if (event.text.unicode == '\b' && !balance.empty()) { // Backspace
+						balance.pop_back();
+					}
+					else if (event.text.unicode < 128 && (isdigit(static_cast<char>(event.text.unicode)) || event.text.unicode == '.')) {
+						// Allow digits and a single decimal point
+						if (event.text.unicode == '.' && balance.find('.') != std::string::npos) {
+							// Allow only one decimal point
+
+
 						}
-						else if (event.text.unicode < 128 && (isdigit(static_cast<char>(event.text.unicode)) || event.text.unicode == '.')) {
-							// Allow digits and a single decimal point
-							if (event.text.unicode == '.' && balance.find('.') != std::string::npos) {
-								// Allow only one decimal point
-								
-								
-							}
-							else
+						else
 							balance += static_cast<char>(event.text.unicode);
-						}
-						enteredBalance.setString(balance);
 					}
+					enteredBalance.setString(balance);
 				}
-				// Check if mouse is over specific sprites and adjust scale accordingly
-				if (true) {
+			}
+			// Check if mouse is over specific sprites and adjust scale accordingly
+			if (true) {
 
-					if (admin_icon.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-						admin_icon.setScale(0.22f, 0.22f); // Scale up
-					else
-						admin_icon.setScale(0.2f, 0.2f);
+				if (admin_icon.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+					admin_icon.setScale(0.22f, 0.22f); // Scale up
+				else
+					admin_icon.setScale(0.2f, 0.2f);
 
-					if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-						back.setScale(0.165, 0.165); // Scale up
-					else
-						back.setScale(0.15, 0.15);
+				if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+					back.setScale(0.165, 0.165); // Scale up
+				else
+					back.setScale(0.15, 0.15);
 
-					if (add_user.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-						add_user.setScale(0.044f, 0.044f); // Scale up
-					else
-						add_user.setScale(0.04f, 0.04f);
+				if (add_user.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+					add_user.setScale(0.044f, 0.044f); // Scale up
+				else
+					add_user.setScale(0.04f, 0.04f);
 
-					if (h1.text1.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-						h1.text1.setCharacterSize(43); // Scale up
-					else
-						h1.text1.setCharacterSize(40);
+				if (h1.text1.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+					h1.text1.setCharacterSize(43); // Scale up
+				else
+					h1.text1.setCharacterSize(40);
 
-					if (h1.text2.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-						h1.text2.setCharacterSize(43); // Scale up
-					else
-						h1.text2.setCharacterSize(40);
+				if (h1.text2.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+					h1.text2.setCharacterSize(43); // Scale up
+				else
+					h1.text2.setCharacterSize(40);
 
-					if (h1.text3.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-						h1.text3.setCharacterSize(26); // Scale up
-					else
-						h1.text3.setCharacterSize(24);
+				if (h1.text3.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+					h1.text3.setCharacterSize(26); // Scale up
+				else
+					h1.text3.setCharacterSize(24);
 
-					if (h1.text4.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-						h1.text4.setCharacterSize(26); // Scale up
-					else
-						h1.text4.setCharacterSize(24);
+				if (h1.text4.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+					h1.text4.setCharacterSize(26); // Scale up
+				else
+					h1.text4.setCharacterSize(24);
 
-					if (h1.text5.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-						h1.text5.setCharacterSize(26); // Scale up
-					else
-						h1.text5.setCharacterSize(24);
+				if (h1.text5.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+					h1.text5.setCharacterSize(26); // Scale up
+				else
+					h1.text5.setCharacterSize(24);
 
-					if (h1.text6.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-						h1.text6.setCharacterSize(26); // Scale up
-					else
-						h1.text6.setCharacterSize(24);
+				if (h1.text6.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+					h1.text6.setCharacterSize(26); // Scale up
+				else
+					h1.text6.setCharacterSize(24);
 
-					if (h1.textfiled_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-						h1.textfiled_1.setScale(0.0935, 0.11); // Scale up
-					else
-						h1.textfiled_1.setScale(0.085, 0.1);
+				if (h1.textfiled_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+					h1.textfiled_1.setScale(0.0935, 0.11); // Scale up
+				else
+					h1.textfiled_1.setScale(0.085, 0.1);
 
-					if (h1.textfiled_2.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-						h1.textfiled_2.setScale(0.0935, 0.11); // Scale up
-					else
-						h1.textfiled_2.setScale(0.085, 0.1);
+				if (h1.textfiled_2.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+					h1.textfiled_2.setScale(0.0935, 0.11); // Scale up
+				else
+					h1.textfiled_2.setScale(0.085, 0.1);
 
-					if (h1.textfiled_3.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-						h1.textfiled_3.setScale(0.0715, 0.11); // Scale up
-					else
-						h1.textfiled_3.setScale(0.065, 0.1);
-
-
+				if (h1.textfiled_3.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+					h1.textfiled_3.setScale(0.0715, 0.11); // Scale up
+				else
+					h1.textfiled_3.setScale(0.065, 0.1);
 
 
-					if (h1.text11.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-						h1.text11.setCharacterSize(25); // Scale up
-					else
-						h1.text11.setCharacterSize(24);
 
-					if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
-						h1.button_1.setScale(0.111, 0.11); // Scale up
-					if(h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) &&event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-					{
-						if(username.empty() ||password.empty()||balance.empty())
-						{
-							missingText.setFillColor(Color::Red);
-							missingText.setString("please fill all data");
-							missing = true;
-							exist = false;
-						}
-						else if (System::allUsers.find(username) != System::allUsers.end())
-						{
 
-							exist = true;
-							alreadyExist.setString("Username Already exist please Try again");
-							alreadyExist.setFillColor(Color::Red);
-						}
-						else {
-							if(missing)
-							{
-								missingText.setFillColor(Color::Green);
-								missingText.setString("Added successfully");
-							}
-							if(exist)
-							{
-								alreadyExist.setString("Added successfully");
-								alreadyExist.setFillColor(Color::Green);
-							}
-							System::Register(username, password, stod(balance));
-							username = "";
-							password = "";
-							balance = "";
-							enteredPassword.setString(std::string(password.size(), '*'));
-							enteredUsername.setString(username);
-							enteredBalance.setString(balance);
-							
-						}
-					}
-					else
-						h1.button_1.setScale(0.11, 0.1);
+				if (h1.text11.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+					h1.text11.setCharacterSize(25); // Scale up
+				else
+					h1.text11.setCharacterSize(24);
 
-				}
+				if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)))
+					h1.button_1.setScale(0.111, 0.11); // Scale up
+				else
+					h1.button_1.setScale(0.11, 0.1);
 
-				if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+				if (h1.button_1.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
-					window.clear();
-					return admin(ali);
+					if (username.empty() || password.empty() || balance.empty())
+					{
+						missingText.setFillColor(Color::Red);
+						missingText.setPosition(515, 670);
+						missingText.setString("please fill all data");
+						missing = true;
+						exist = false;
+					}
+					else if (System::allUsers.find(username) != System::allUsers.end())
+					{
+
+						exist = true;
+						alreadyExist.setString("  Username Already exist\nplease choose another one");
+						alreadyExist.setFillColor(Color::Red);
+					}
+					else {
+						if (missing)
+						{
+							missingText.setFillColor(Color::Green);
+							missingText.setPosition(515, 670);
+							missingText.setString("Added successfully");
+						}
+						if (exist)
+						{
+							alreadyExist.setPosition(515, 670);
+							alreadyExist.setString("Added successfully");
+							alreadyExist.setFillColor(Color::Green);
+						}
+						exist = true;
+						System::Register(username, password, stod(balance));
+						username = "";
+						password = "";
+						balance = "";
+						enteredPassword.setString(std::string(password.size(), '*'));
+						enteredUsername.setString(username);
+						enteredBalance.setString(balance);
+						alreadyExist.setString("New user has been added");
+						alreadyExist.setFillColor(Color::Green);
+
+					}
 				}
+				
+
+			}
+
+			if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+			{
+				window.clear();
+				return admin(ali);
+			}
 
 		}
 
-			// Handle mouse interaction with buttons
+		// Handle mouse interaction with buttons
 
-			// Clear the window
-			window.clear();
+		// Clear the window
+		window.clear();
 
-			// Draw other sprites
-			admin_add_user_draw(h1);
-			// Calculate the new position of the sprites based on elapsed time for x-axis transition
-			if (clock.getElapsedTime().asSeconds() < animationTimeX)
-			{
-				float elapsedTimeX = clock.getElapsedTime().asSeconds();
-				float newXPosition = initialPosition.x + (distanceToMoveX * (elapsedTimeX / animationTimeX));
-				h1.text1.setPosition(newXPosition + 165, 80); // Adjust position of text1
-				h1.text2.setPosition(newXPosition + 165, 130); // Adjust position of text2
-				admin_icon.setPosition(newXPosition + 50, 80); // Adjust position of wallet_icon
-				profile_edit.setPosition(950 - newXPosition, 80);
-				//h1.text3.setPosition(950 - newXPosition, 180);
-			}
-			else
-			{
-				// Animation for x-axis transition is complete, set the final position of the sprites
-				h1.text1.setPosition(finalXPosition + 165, 80); // Adjust position of text1
-				h1.text2.setPosition(finalXPosition + 165, 130); // Adjust position of text2
-				admin_icon.setPosition(finalXPosition + 50, 80); // Adjust position of wallet_icon
-				profile_edit.setPosition(950, 80);
-				//h1.text3.setPosition(950, 180);
-			}
+		// Draw other sprites
+		admin_add_user_draw(h1);
+		// Calculate the new position of the sprites based on elapsed time for x-axis transition
+		if (clock.getElapsedTime().asSeconds() < animationTimeX)
+		{
+			float elapsedTimeX = clock.getElapsedTime().asSeconds();
+			float newXPosition = initialPosition.x + (distanceToMoveX * (elapsedTimeX / animationTimeX));
+			h1.text1.setPosition(newXPosition + 165, 80); // Adjust position of text1
+			h1.text2.setPosition(newXPosition + 165, 130); // Adjust position of text2
+			admin_icon.setPosition(newXPosition + 50, 80); // Adjust position of wallet_icon
+			profile_edit.setPosition(950 - newXPosition, 80);
+			//h1.text3.setPosition(950 - newXPosition, 180);
+		}
+		else
+		{
+			// Animation for x-axis transition is complete, set the final position of the sprites
+			h1.text1.setPosition(finalXPosition + 165, 80); // Adjust position of text1
+			h1.text2.setPosition(finalXPosition + 165, 130); // Adjust position of text2
+			admin_icon.setPosition(finalXPosition + 50, 80); // Adjust position of wallet_icon
+			profile_edit.setPosition(950, 80);
+			//h1.text3.setPosition(950, 180);
+		}
 
 
 
-			// Draw the texts, wallet_icon, buttons
-			window.draw(h1.text1);
-			window.draw(h1.text2);
-			window.draw(admin_icon);
-			window.draw(person);
-		    if(exist)
-		    {
-		 	  window.draw(alreadyExist);
-			}
-			else if (missing)
-				window.draw(missingText);
-			window.draw(enteredUsername);
-			window.draw(enteredPassword);
-			window.draw(enteredBalance);
-			// Display the window
-			window.display();
+		// Draw the texts, wallet_icon, buttons
+		window.draw(h1.text1);
+		window.draw(h1.text2);
+		window.draw(admin_icon);
+		if (exist)
+		{
+			window.draw(alreadyExist);
+		}
+		else if (missing)
+		window.draw(missingText);
+		window.draw(enteredUsername);
+		window.draw(enteredPassword);
+		window.draw(enteredBalance);
+		// Display the window
+		window.display();
 
-			// Check if both animations are complete
-			/*if (clock.getElapsedTime().asSeconds() >= animationTimeX && clock.getElapsedTime().asSeconds() >= animationTimeY)
-				break;*/
+		// Check if both animations are complete
+		/*if (clock.getElapsedTime().asSeconds() >= animationTimeX && clock.getElapsedTime().asSeconds() >= animationTimeY)
+			break;*/
 	}
 }
 void admin_add_user_set(half& h1)
@@ -8878,6 +8969,8 @@ void admin_all_transactions(Admin& ali)
 				if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
 					window.clear();
+					view.setCenter(600, 400);
+					window.setView(view);
 					return admin(ali);
 				}
 				if (event.type == sf::Event::MouseWheelScrolled && event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
@@ -8894,11 +8987,7 @@ void admin_all_transactions(Admin& ali)
 					}
 				}
 			}
-			if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-			{
-				window.clear();
-				return admin(ali);
-			}
+			
 
 		}
 		window.clear();
@@ -9221,6 +9310,13 @@ void admin_all_transactions_draw(half& h1)
 void admin_all_users(Admin& ali)
 
 {
+	
+
+	sf::Vector2f initialViewCenter(600, 400);
+
+	// Set the initial view position
+	view.setCenter(initialViewCenter);
+
 	half h1;
 	h1.textfiled_arr_1 = new Sprite[System::allUsers.size()];
 	h1.textfiled_arr_2 = new Sprite[System::allUsers.size()];
@@ -9270,7 +9366,8 @@ void admin_all_users(Admin& ali)
 
 	// Create a clock to measure time
 	sf::Clock clock;
-	sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
+	view.setCenter(600, 400);
+
 	// Event loop
 	while (window.isOpen())
 	{
@@ -9384,11 +9481,14 @@ void admin_all_users(Admin& ali)
 						h1.text_arr_6[i].setCharacterSize(22);
 				}
 
-				
+
 
 				if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
+					view.setCenter(600, 400);
+					window.setView(view);
 					window.clear();
+
 					return admin(ali);
 				}
 				if (event.type == sf::Event::MouseWheelScrolled && event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
@@ -9405,13 +9505,15 @@ void admin_all_users(Admin& ali)
 					}
 				}
 			}
-			
+
 			auto it = System::allUsers.begin();
 			for (int i = 0; i < System::allUsers.size(); i++)
 			{
 				if (h1.button_1_arr[i].getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
 					window.clear();
+					view.setCenter(600, 400);
+					window.setView(view);
 					return admin_User_transactions(ali, it->second);
 
 				}
@@ -9567,6 +9669,7 @@ void admin_all_users(Admin& ali)
 
 
 	}
+	view.setCenter(600, 400);
 }
 void admin_all_users_set(half& h1)
 {
@@ -9670,7 +9773,7 @@ void admin_all_users_set(half& h1)
 	h1.text2.setPosition(265, 130);
 	if (System::allUsers.empty())
 	{
-		h1.text10.setString("There is no Users\nto be displayed");
+		h1.text10.setString("There is no Users to be \n         displayed");
 		h1.text10.setFont(britanicFont);
 		h1.text10.setCharacterSize(35);
 		h1.text10.setPosition(400, 450);
@@ -9704,6 +9807,7 @@ void admin_all_users_draw(half& h1)
 void admin_User_transactions(Admin& ali, User& omar)
 
 {
+	view.setCenter(600, 400);
 	half h1;
 	h1.textfiled_arr_1 = new Sprite[omar.History.size()];
 	h1.textfiled_arr_2 = new Sprite[omar.History.size()];
@@ -9758,9 +9862,8 @@ void admin_User_transactions(Admin& ali, User& omar)
 
 	// Create a clock to measure time
 	sf::Clock clock;
-	sf::View view(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
-	
-	
+
+
 	// Event loop
 	while (window.isOpen())
 	{
@@ -9923,6 +10026,8 @@ void admin_User_transactions(Admin& ali, User& omar)
 				if (back.getGlobalBounds().contains(sf::Vector2f(mousePosition)) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 				{
 					window.clear();
+					view.setCenter(600, 400);
+					window.setView(view);
 					return admin_all_users(ali);
 				}
 				if (event.type == sf::Event::MouseWheelScrolled && event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
