@@ -48,7 +48,7 @@ void Admin::view_Accounts_Data()
 	}
 }
 
-void Admin::edit_username(string name,string new_name )
+void Admin::edit_username(string name, string new_name)
 {
 	User* f = System::getUser(name);
 	/*if (!System::search_user(name))
@@ -104,7 +104,7 @@ void Admin::edit_username(string name,string new_name )
 	cout << "the Username has been Changed Sucessfully \n";
 }
 
-void Admin::edit_password(string name,string new_pass)
+void Admin::edit_password(string name, string new_pass)
 {
 	/*if (!System::search_user(name))
 	{
@@ -115,13 +115,13 @@ void Admin::edit_password(string name,string new_pass)
 	/*string new_pass;
 	cout << "Please Enter The New Password :\t";
 	cin >> new_pass;*/
-	
+
 	System::allUsers[name].setpassword(System::sha256(new_pass));
 	cout << "the Password has been Changed Successfully \n";
 	return;
 }
 
-void Admin::add_user(string username,string password,double balance)
+void Admin::add_user(string username, string password, double balance)
 {
 	/*string username;
 	cout << "Enter username :";
@@ -138,9 +138,9 @@ void Admin::add_user(string username,string password,double balance)
 		cout << "enter balance :";
 		cin >> balance;*/
 
-		User user(username, password, balance);
-		System::allUsers[username] = user;
-		cout << "User '" << username << "' added successfully." << endl;
+	User user(username, password, balance);
+	System::allUsers[username] = user;
+	cout << "User '" << username << "' added successfully." << endl;
 	//}
 }
 
@@ -175,8 +175,8 @@ void Admin::suspend_user(string username)
 		cout << "the user is already suspended\n\n";
 	}
 	else {*/
-		System::allUsers[username].suspended = true;
-		cout << "The User Has Been Suspended Successfully\n";
+	System::allUsers[username].suspended = true;
+	cout << "The User Has Been Suspended Successfully\n";
 	//}
 }
 
@@ -193,8 +193,8 @@ void Admin::reactivated(string username)
 		return suspend_user(name);
 	}*/
 	/*if (System::allUsers[name].suspended) {*/
-		System::allUsers[username].suspended = false;
-		cout << "The User Has Been reactivated Successfully\n";
+	System::allUsers[username].suspended = false;
+	cout << "The User Has Been reactivated Successfully\n";
 	//}
 	/*else
 		cout << "the user is not suspended\n\n";*/
@@ -214,7 +214,7 @@ void Admin::view_all_transactions()
 
 }
 
-void Admin::edit_balance(string name,double new_balance)
+void Admin::edit_balance(string name, double new_balance)
 {
 
 	/*if (!System::search_user(name))
